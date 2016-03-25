@@ -1,0 +1,42 @@
+[
+	{
+		"title": "Start",
+		"tags": "",
+		"body": "What's your name?\n-> Red\n    That's nice.\n-> Jack\n    NOT AGAIN\n-> Not telling you.\n\nSo, what's up?\n[[Oh, nothing.|Nothing]]\n",
+		"position": {
+			"x": 548,
+			"y": 273
+		},
+		"colorID": 0
+	},
+	{
+		"title": "Nothing",
+		"tags": "",
+		"body": "That's cool.\n\nSo....\nYeah.",
+		"position": {
+			"x": 951,
+			"y": 364
+		},
+		"colorID": 0
+	},
+	{
+		"title": "EVERYTHING",
+		"tags": "",
+		"body": "OH\nMY\nGAWD\nBECKY",
+		"position": {
+			"x": 204,
+			"y": 224
+		},
+		"colorID": 0
+	},
+	{
+		"title": "Node3",
+		"tags": "",
+		"body": "Fuck you.\nAlso...\nIt's spelled \"ceiling\".\nLol.",
+		"position": {
+			"x": 312,
+			"y": 517
+		},
+		"colorID": 1
+	}
+]

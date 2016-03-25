@@ -1,0 +1,32 @@
+[
+	{
+		"title": "Start",
+		"tags": "",
+		"body": "A: Hey, I'm a character in a script!\nB: And I am too! You are talking to me!\n-> What's going on\n    A: Why this is a demo of the script system!\n    B: And you're in it!\n-> Um ok\nA: How delightful!\nB: What would you prefer to do next?\n[[Oh, nothing.|nothing]]\n[[EVERYTHINHG|LearnMore]]\n",
+		"position": {
+			"x": 593,
+			"y": 178
+		},
+		"colorID": 0
+	},
+	{
+		"title": "nothing",
+		"tags": "",
+		"body": "A: Oh, goodbye!\nB: You'll be back soon!",
+		"position": {
+			"x": 387,
+			"y": 487
+		},
+		"colorID": 0
+	},
+	{
+		"title": "LearnMore",
+		"tags": "",
+		"body": "A: HAHAHA",
+		"position": {
+			"x": 765,
+			"y": 472
+		},
+		"colorID": 0
+	}
+]
