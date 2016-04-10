@@ -2,9 +2,9 @@
 	{
 		"title": "Start",
 		"tags": "",
-		"body": "What's your name?\n-> Red\n    That's nice.\n-> Jack\n    NOT AGAIN\n-> Not telling you.\n\nSo, what's up?\n[[Oh, nothing.|Nothing]]\n",
+		"body": "What's your name?\n-> Red\n    That's nice.\n-> Jack\n    NOT AGAIN\n-> Not telling you.\nchar:dialogue\nchar: dialogue\nchar: dia:logue\nno char\\:dialgoue\n(char):dialogue\nmore dialogue\nmore:dialogue\n~more dialogue\n...more dialogue\n...:more dialogue\n~:more dialogue\nSo, what's up?\n[[Oh, nothing.|Nothing]]\n[[yeah, whatever|node3]]",
 		"position": {
-			"x": 548,
+			"x": 549,
 			"y": 273
 		},
 		"colorID": 0
@@ -30,7 +30,7 @@
 		"colorID": 0
 	},
 	{
-		"title": "Node3",
+		"title": "node3",
 		"tags": "",
 		"body": "Fuck you.\nAlso...\nIt's spelled \"ceiling\".\nLol.",
 		"position": {
