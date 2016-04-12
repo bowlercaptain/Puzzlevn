@@ -2,7 +2,7 @@
 	{
 		"title": "Start",
 		"tags": "",
-		"body": "What's your name?\n-> Red\n    That's nice.\n-> Jack\n    NOT AGAIN\n-> Not telling you.\nchar:dialogue\nchar: dialogue\nchar: dia:logue\nno char\\:dialgoue\n(char):dialogue\nmore dialogue\nmore:dialogue\n~more dialogue\n...more dialogue\n...:more dialogue\n~:more dialogue\nSo, what's up?\n[[Oh, nothing.|Nothing]]\n[[yeah, whatever|node3]]",
+		"body": "Jack:What's your name?\n-> Red\n    That's nice.\n-> Jack\n    NOT AGAIN\n-> Not telling you.\nJill:dialogue\nJack: dialogue\nchar: dia:logue\nno char\\:dialgoue\n(char):dialogue\nmore dialogue\nmore:dialogue\n~more dialogue\n...more dialogue\n...:more dialogue\n~:more dialogue\nSo, what's up?\n[[Oh, nothing.|Nothing]]\n[[yeah, whatever|node3]]",
 		"position": {
 			"x": 549,
 			"y": 273

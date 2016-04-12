@@ -14,12 +14,34 @@ public class ThisIsUI : DialogueUIBehaviour {
 
     // Display a line.
     public override IEnumerator RunLine(Yarn.Line line) {
+        if (line.text.Contains(":"))
+        {
+            string title = line.text.Substring(0, line.text.IndexOf(':'));
+            string text = line.text.Substring(line.text.IndexOf(':') + 1);
+            if (title.Split('.').Length > 1)
+            {
+                ShowPortrait(title.Split('.')[1], title.Split('.')[0]);
+            }
+            else
+            {
+                ShowPortrait(character: title);
+            }
+            output.text = text;
+        } else
+        {
+            output.text = line.text;
+        }
         //break by :
         //build command and send to RunCommand to change emotions if necessary. Then Apply Shading?
         Debug.Log(line.text);
-        output.text = line.text;
+        
         yield return null;
         //yield break;
+
+        while (!Input.GetKeyDown(KeyCode.Space))
+        {
+            yield return null;
+        }
     }
 
     // Display the options, and call the optionChooser when done.
@@ -72,6 +94,25 @@ public class ThisIsUI : DialogueUIBehaviour {
         Debug.Log("started.");
         // Default implementation does nothing.
         yield break;
+    }
+
+
+    public DialogueCharacter defaultFormat;
+    public void ShowPortrait(string emotion = "default", string character = null, int slot = -1) //this will be from commands
+    {
+        DialogueCharacter format = defaultFormat;
+        if (character != null)
+        {
+            format = Resources.Load<DialogueCharacter>(character + "/" + emotion);
+        }
+        if (format != null)
+        {
+            charName.text = format.getName();
+            output.color = format.textColor;
+        } else
+        {
+            Debug.Log("NO FORMAT PUT DEBUG INFO HERE");
+        }
     }
 
 }
