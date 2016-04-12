@@ -103,10 +103,15 @@ public class ThisIsUI : DialogueUIBehaviour {
         DialogueCharacter format = null;
         if (character != null)
         {
-            format = Resources.Load<DialogueCharacter>(character + "/" + emotion);
+            format = Resources.Load<DialogueCharacter>("Characters/"+character + "/" + emotion);
+        }
+        if(format == null && character!=null)
+        {
+            Resources.Load<DialogueCharacter>("Characters/" + character + "/default");
         }
         if(format == null)
         {
+            Debug.Log("Using default for " + character + "/" + emotion);
             format = defaultFormat;
         }
         if (format != null)
