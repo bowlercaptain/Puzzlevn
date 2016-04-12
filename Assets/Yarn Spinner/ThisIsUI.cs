@@ -100,10 +100,14 @@ public class ThisIsUI : DialogueUIBehaviour {
     public DialogueCharacter defaultFormat;
     public void ShowPortrait(string emotion = "default", string character = null, int slot = -1) //this will be from commands
     {
-        DialogueCharacter format = defaultFormat;
+        DialogueCharacter format = null;
         if (character != null)
         {
             format = Resources.Load<DialogueCharacter>(character + "/" + emotion);
+        }
+        if(format == null)
+        {
+            format = defaultFormat;
         }
         if (format != null)
         {
@@ -111,7 +115,7 @@ public class ThisIsUI : DialogueUIBehaviour {
             output.color = format.textColor;
         } else
         {
-            Debug.Log("NO FORMAT PUT DEBUG INFO HERE");
+            Debug.LogError("NO FORMAT PUT DEBUG INFO HERE");
         }
     }
 
