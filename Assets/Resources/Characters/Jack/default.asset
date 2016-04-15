@@ -11,5 +11,5 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: default
   m_EditorClassIdentifier: Assembly-CSharp::JackScript
-  textColor: {r: 0, g: 0, b: 0, a: 0}
+  textColor: {r: 0, g: 1, b: 0.13103461, a: 1}
   textFont: {fileID: 0}

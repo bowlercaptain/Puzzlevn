@@ -48,13 +48,27 @@ public class ThisIsUI : DialogueUIBehaviour {
     public override IEnumerator RunOptions(Yarn.Options optionsCollection,
                                             Yarn.OptionChooser optionChooser)
     {
-        foreach (string option in optionsCollection.options)
+        output.text = "";
+        int len = optionsCollection.options.Count;
+        for (int i = 0; i < len; i++)
         {
-            Debug.Log(option);
+            output.text += i.ToString() + ": " + optionsCollection.options[i];
         }
-        optionChooser(0);
-        yield return null;
-        
+        bool done = false;
+        while (!done)
+        {
+            for (int i = 0; i < len; i++)
+            {
+
+            }
+            foreach (string option in optionsCollection.options)
+            {
+                Debug.Log(option);
+            }
+            //optionChooser(0);
+            yield return null;
+        }
+        yield break;
     }
 
     // Perform some game-specific command.

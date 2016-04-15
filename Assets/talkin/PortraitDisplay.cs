@@ -4,6 +4,25 @@ using System.Collections.Generic;
 public class PortraitDisplay : MonoBehaviour
 {
 
+    MeshRenderer leftRend;
+    MeshRenderer rightRend;//do this with numbered slots
+
+    //set character(l/r, character)
+    //set empotion (l/r/char, emotion)
+    //play animation (lrc, animation);
+    //fade managment
+    //etc.
+    //use animationManager type thing, make character switches/fades also animations in coroutines into the same system
+
+
+
+
+
+
+
+
+
+
 
     //Dictionary<string, Character> characterLookup;//CONVERT THIS TO FOLDER/RESOURCES/SCRIPTABLEOBJECT FORMAT
 
