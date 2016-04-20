@@ -48,23 +48,30 @@ public class ThisIsUI : DialogueUIBehaviour {
     public override IEnumerator RunOptions(Yarn.Options optionsCollection,
                                             Yarn.OptionChooser optionChooser)
     {
+
+        Debug.Log("Running Options");
         output.text = "";
         int len = optionsCollection.options.Count;
         for (int i = 0; i < len; i++)
         {
-            output.text += i.ToString() + ": " + optionsCollection.options[i];
+            output.text += (i+1).ToString() + ": " + optionsCollection.options[i];
+        }
+        foreach (string option in optionsCollection.options)
+        {
+            Debug.Log(option);
         }
         bool done = false;
         while (!done)
         {
             for (int i = 0; i < len; i++)
             {
-
+                if (Input.GetKey((i+1).ToString()))
+                {
+                    optionChooser(i);
+                    done = true;
+                }
             }
-            foreach (string option in optionsCollection.options)
-            {
-                Debug.Log(option);
-            }
+            
             //optionChooser(0);
             yield return null;
         }
