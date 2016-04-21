@@ -10,7 +10,7 @@ public class ThisIsUI : DialogueUIBehaviour {
     public Text output;
     public Text charName;
 
-    PortraitDisplay portrait;
+    public PortraitDisplay portrait;
 
     // Display a line.
     public override IEnumerator RunLine(Yarn.Line line) {
@@ -81,6 +81,10 @@ public class ThisIsUI : DialogueUIBehaviour {
     // Perform some game-specific command.
     public override IEnumerator RunCommand(Yarn.Command command) {
         Debug.Log("Run command: "+command.text);
+        string[] splitCommand = command.text.Split(' ');
+        if (splitCommand[0] == "show") {
+        portrait.SetCharacter((PortraitDisplay.RendName)Enum.Parse(typeof(PortraitDisplay.RendName), splitCommand[1]), splitCommand[2]);//figure this out later;
+        }
         //"show <character> <emotion>"
         //"move <character> <slot>"
         //move <slot> <slot>
@@ -121,6 +125,21 @@ public class ThisIsUI : DialogueUIBehaviour {
     public DialogueCharacter defaultFormat;
     public void ShowPortrait(string emotion = "default", string character = null, int slot = -1) //this will be from commands
     {
+        if (slot != -1)
+        {
+            if (character != null)
+            {
+                portrait.SetCharacter(slot, character);
+                portrait.SetEmotion(slot, emotion);
+            }
+            else
+            {
+                portrait.SetEmotion(slot, emotion);
+            }
+        } else
+        {
+            portrait.SetEmotion(character, emotion);
+        }
         DialogueCharacter format = null;
         if (character != null)
         {

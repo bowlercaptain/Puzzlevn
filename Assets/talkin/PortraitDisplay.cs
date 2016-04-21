@@ -3,18 +3,58 @@ using System.Collections;
 using System.Collections.Generic;
 public class PortraitDisplay : MonoBehaviour
 {
+    public enum RendName
+    {
+        left = 0,
+        right = 1
+    }
+    public MeshRenderer[] rends;
+    string[] slotChars;
 
-    MeshRenderer leftRend;
-    MeshRenderer rightRend;//do this with numbered slots
+    public void Awake()
+    {
+        slotChars = new string[rends.Length];
+    }
 
-    //set character(l/r, character)
-    //set empotion (l/r/char, emotion)
+    public void SetCharacter(RendName name, string charName)
+    {
+        SetCharacter((int)name, charName);
+    }
+
+    public void SetCharacter(int slot, string charName)
+    {
+        slotChars[slot] = charName;
+        //queue show default emotion
+        SetEmotion(slot, "default");
+    }
+
+    public void SetEmotion(string character, string emotion)
+    {
+        for (int i = 0; i < slotChars.Length; i++)
+        {
+            if(slotChars[i] == character) {
+                SetEmotion(i, emotion);
+            }
+        }
+    }
+
+    public void SetEmotion(int slot, string emotion)
+    {
+        Texture toShow = Resources.Load<Texture>("Characters/" + slotChars[slot] + "/" + emotion);
+        if(toShow == null)
+        {
+            toShow = Resources.Load<Texture>("Characters/fallback");
+        }
+
+        rends[slot].material.mainTexture = toShow; 
+    }
+
     //play animation (lrc, animation);
     //fade managment
     //etc.
     //use animationManager type thing, make character switches/fades also animations in coroutines into the same system
 
-
+    
 
 
 
