@@ -2,17 +2,17 @@
 	{
 		"title": "Start",
 		"tags": "",
-		"body": "<<show left Jack>>\n<<show right Jill>>\nJack:What's your name?\n-> Red\n    That's nice.\n-> Jack\n    NOT AGAIN\n-> Not telling you.\nJill:dialogue\nmore dialogue\n\nSo, what's up?\n[[Oh, nothing.|Nothing]]\n[[yeah, whatever|node3]]",
+		"body": "<<place left Jack>>\n<<place right Jill>>\nJack:What's your name?\n-> Red\n    That's nice.\n-> Jack\n    Jack.Angry:NOT AGAIN\n-> Not telling you.\n<<emote Jack dapper>>\nJill:dialogue\nmore dialogue\n\nSo, what's up?\n[[Oh, nothing.|Nothing]]\n[[yeah, whatever|node3]]",
 		"position": {
 			"x": 549,
-			"y": 273
+			"y": 271
 		},
 		"colorID": 0
 	},
 	{
 		"title": "Nothing",
 		"tags": "",
-		"body": "That's cool.\n\nSo....\nYeah.\n\nJack: dialogue\nchar: dia:logue\nno char\\:dialgoue\n(char):dialogue\nmore dialogue\nmore:dialogue\n~more dialogue\n...more dialogue\n...:more dialogue\n~:more dialogue",
+		"body": "That's cool.\n\nSo....\nYeah.\n\nJack: dialogue\nJill: dia:logue\njack:dialgoue\n(char):dialogue\nmore dialogue\nmore:dialogue\n~more dialogue\n...more dialogue\n...:more dialogue\n~:more dialogue",
 		"position": {
 			"x": 951,
 			"y": 362

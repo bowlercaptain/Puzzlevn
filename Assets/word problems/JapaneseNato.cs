@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class JapaneseNato : WordPuzzle
+public class JapaneseNato
 {
     public string lookup(char key)
     {
@@ -41,16 +41,15 @@ public class JapaneseNato : WordPuzzle
         }
     }
 
-    // Use this for initialization
-    void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
+    public string Encode(string toEncode)
+    {
+        string result = "";
+        foreach(char letter in toEncode.ToCharArray())
+        {
+            result += lookup(letter);
+        }
+        return result;
+    }
 
 
 }

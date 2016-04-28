@@ -81,18 +81,27 @@ public class ThisIsUI : DialogueUIBehaviour {
     // Perform some game-specific command.
     public override IEnumerator RunCommand(Yarn.Command command) {
         Debug.Log("Run command: "+command.text);
-        string[] splitCommand = command.text.Split(' ');
-        if (splitCommand[0] == "show") {
+        string[] splitCommand = command.text.Split(' ');//command.text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+        if (splitCommand[0] == "place") {
+            Debug.Log("Running show");
         portrait.SetCharacter((PortraitDisplay.RendName)Enum.Parse(typeof(PortraitDisplay.RendName), splitCommand[1]), splitCommand[2]);//figure this out later;
         }
-        //"show <character> <emotion>"
+        if(splitCommand[0] == "emote")
+        {
+            portrait.SetEmotion(splitCommand[1], splitCommand[2]);
+        }
+        
+        //fuck animation (for now)
         //"move <character> <slot>"
         //move <slot> <slot>
         //animate <character> <animation>
         //animate <slot> <animation>
+
+        //fuck shading:
         //shade <character/slot>
         //light <character/slot>
-
+        
+        //figure out pixelchibi animations? need to make pixelchibiland first.
         
         
         yield return null;
@@ -141,26 +150,35 @@ public class ThisIsUI : DialogueUIBehaviour {
             portrait.SetEmotion(character, emotion);
         }
         DialogueCharacter format = null;
-        if (character != null)
+        //if (character != null)
+        //{
+        //    format = Resources.Load<DialogueCharacter>("Characters/"+character + "/" + emotion);
+        //} if format == null && character != null)
+        if(character!=null)
         {
-            format = Resources.Load<DialogueCharacter>("Characters/"+character + "/" + emotion);
-        }
-        if(format == null && character!=null)
-        {
-            Resources.Load<DialogueCharacter>("Characters/" + character + "/default");
+            format = Resources.Load<DialogueCharacter>("Characters/" + character + "/"+character);
+            
         }
         if(format == null)
         {
-            Debug.Log("Using default for " + character + "/" + emotion);
+            Debug.Log("Using default; could not find " + character);
             format = defaultFormat;
         }
+        format.name = character;
+        ShowFormat(format);
+        
+    }
+
+    public void ShowFormat(DialogueCharacter format)
+    {
         if (format != null)
         {
             charName.text = format.getName();
             output.color = format.textColor;
-        } else
+        }
+        else
         {
-            Debug.LogError("NO FORMAT PUT DEBUG INFO HERE");
+            Debug.LogError("NO DEFAULT FORMAT PANIC ALSO HERE'S THE STACK TRACE");
         }
     }
 

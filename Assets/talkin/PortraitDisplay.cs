@@ -18,14 +18,17 @@ public class PortraitDisplay : MonoBehaviour
 
     public void SetCharacter(RendName name, string charName)
     {
+        Debug.Log("setting character " + name.ToString() + " " + charName);
         SetCharacter((int)name, charName);
     }
 
     public void SetCharacter(int slot, string charName)
     {
-        slotChars[slot] = charName;
-        //queue show default emotion
-        SetEmotion(slot, "default");
+        if (slotChars[slot] != charName)//yes this is actually necessary
+        {
+            slotChars[slot] = charName;
+            SetEmotion(slot, "default");//so this doesn't run when you're just going back to a character and want the right font.
+        }
     }
 
     public void SetEmotion(string character, string emotion)
@@ -40,12 +43,17 @@ public class PortraitDisplay : MonoBehaviour
 
     public void SetEmotion(int slot, string emotion)
     {
-        Texture toShow = Resources.Load<Texture>("Characters/" + slotChars[slot] + "/" + emotion);
-        if(toShow == null)
+        SetEmotion(slot, slotChars[slot], emotion);
+    }
+
+
+    public void SetEmotion(int slot, string charname, string emotion)
+    {
+        Texture toShow = Resources.Load<Texture>("Characters/" + charname + "/" + emotion);
+        if(toShow == null)//skip looking for character default to show that emotion is missing
         {
             toShow = Resources.Load<Texture>("Characters/fallback");
         }
-
         rends[slot].material.mainTexture = toShow; 
     }
 

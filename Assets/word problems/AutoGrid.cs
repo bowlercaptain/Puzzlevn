@@ -11,7 +11,6 @@ class AutoGrid : MonoBehaviour
 
     public float wPad=0;
     public float vPad=0;
-    public UnityEngine.UI.ScrollRect view;
 
 //    public bool lockWidth;//THIS SCRIPT ONLY DOES VERTICAL GRIDS OF FIXED WIDTH NYEAH
     void Awake()
