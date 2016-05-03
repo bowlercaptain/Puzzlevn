@@ -208,7 +208,7 @@ Camera:
   m_GameObject: {fileID: 527480289}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 2
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0.019607844}
   m_NormalizedViewPortRect:
     serializedVersion: 2
@@ -390,8 +390,8 @@ GameObject:
   - 4: {fileID: 783785169}
   - 114: {fileID: 783785168}
   - 114: {fileID: 783785167}
-  - 114: {fileID: 783785166}
   - 114: {fileID: 783785170}
+  - 114: {fileID: 783785166}
   m_Layer: 0
   m_Name: drunner
   m_TagString: Untagged
@@ -407,7 +407,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 783785165}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03ba5ee37d35ca446ae737265cd69e85, type: 3}
+  m_Script: {fileID: 11500000, guid: 333a6c1011c398d4e9fea4c1b1c1f125, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   output: {fileID: 705480539}
@@ -764,7 +764,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2096648122}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.91, y: -0.06, z: 0}
+  m_LocalPosition: {x: -3.1, y: -0.06, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

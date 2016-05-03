@@ -21,10 +21,12 @@ public class ThisIsUI : DialogueUIBehaviour {
             if (title.Split('.').Length > 1)
             {
                 ShowPortrait(title.Split('.')[1], title.Split('.')[0]);
+                portrait.HighlightCharacter(title.Split('.')[0]);
             }
             else
             {
                 ShowPortrait(character: title);
+                portrait.HighlightCharacter(title.Split('.')[0]);
             }
             output.text = text;
         } else
@@ -85,6 +87,7 @@ public class ThisIsUI : DialogueUIBehaviour {
         if (splitCommand[0] == "place") {
             Debug.Log("Running show");
         portrait.SetCharacter((PortraitDisplay.RendName)Enum.Parse(typeof(PortraitDisplay.RendName), splitCommand[1]), splitCommand[2]);//figure this out later;
+            portrait.SetEmotion(splitCommand[2], "default");
         }
         if(splitCommand[0] == "emote")
         {
@@ -132,20 +135,20 @@ public class ThisIsUI : DialogueUIBehaviour {
 
 
     public DialogueCharacter defaultFormat;
-    public void ShowPortrait(string emotion = "default", string character = null, int slot = -1) //this will be from commands
+    public void ShowPortrait(string emotion = null, string character = null, int slot = -1) //this will be from commands
     {
         if (slot != -1)
         {
             if (character != null)
             {
                 portrait.SetCharacter(slot, character);
-                portrait.SetEmotion(slot, emotion);
             }
             else
             {
-                portrait.SetEmotion(slot, emotion);
+                character = portrait.GetCharacter(slot);
             }
-        } else
+        }
+        if(emotion != null)
         {
             portrait.SetEmotion(character, emotion);
         }

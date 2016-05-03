@@ -31,11 +31,17 @@ public class PortraitDisplay : MonoBehaviour
         }
     }
 
+    public string GetCharacter(int slot)
+    {
+        return slotChars[slot];
+    }
+
     public void SetEmotion(string character, string emotion)
     {
         for (int i = 0; i < slotChars.Length; i++)
         {
-            if(slotChars[i] == character) {
+            if (slotChars[i] == character)
+            {
                 SetEmotion(i, emotion);
             }
         }
@@ -50,11 +56,65 @@ public class PortraitDisplay : MonoBehaviour
     public void SetEmotion(int slot, string charname, string emotion)
     {
         Texture toShow = Resources.Load<Texture>("Characters/" + charname + "/" + emotion);
-        if(toShow == null)//skip looking for character default to show that emotion is missing
+        if (toShow == null)//skip looking for character default to show that emotion is missing
         {
             toShow = Resources.Load<Texture>("Characters/fallback");
         }
-        rends[slot].material.mainTexture = toShow; 
+        rends[slot].material.mainTexture = toShow;
+    }
+
+    public void HighlightCharacter(string character)
+    {
+        HighlightCharacter(GetSlot(character));
+    }
+
+    public void HighlightCharacter(int slot)
+    {
+        for (int i = 0; i < rends.Length; i++)
+        {
+            if (i == slot)
+            {
+                FadeIn(i);
+            }
+            else
+            {
+                FadeOut(i);
+            }
+        }
+    }
+
+    public void FadeOut(int slot)
+    {
+        if (rends[slot] != null)
+            rends[slot].material.color = Color.grey;
+    }
+
+    public void FadeIn(int slot)
+    {
+        if (rends[slot] != null)
+            rends[slot].material.color = Color.white;//send a fade-to-color animation to the appropriate manager; override previous fades. (animation slots? animation tags? non-uniqueness somehow.
+    }
+
+    public void FadeOut(string character)
+    {
+        FadeOut(GetSlot(character));
+    }
+
+    public void FadeIn(string character)
+    {
+        FadeIn(GetSlot(character));
+    }
+
+    public int GetSlot(string character)
+    {
+        for (int i = 0; i < slotChars.Length; i++)
+        {
+            if (slotChars[i] == character)
+            {
+                return i;
+            }
+        }
+        return -1;
     }
 
     //play animation (lrc, animation);
@@ -62,7 +122,7 @@ public class PortraitDisplay : MonoBehaviour
     //etc.
     //use animationManager type thing, make character switches/fades also animations in coroutines into the same system
 
-    
+
 
 
 
@@ -91,45 +151,45 @@ public class PortraitDisplay : MonoBehaviour
     //    public Color textColor;//used in similar ways: font, color, border style, whatever
     //}
 
- 
 
-        /*
-        //load from Resources Characters/item0/item0. If that's null, show missing resource. load default for character if no item [1]. use last loaded on that side if nothing
 
-        var splitString = emotion.Split('.');
-        Emotion toShow = defaultEmotion;
-        if (characterLookup.ContainsKey(splitString[0]))
+    /*
+    //load from Resources Characters/item0/item0. If that's null, show missing resource. load default for character if no item [1]. use last loaded on that side if nothing
+
+    var splitString = emotion.Split('.');
+    Emotion toShow = defaultEmotion;
+    if (characterLookup.ContainsKey(splitString[0]))
+    {
+        Character chara = characterLookup[splitString[0]];
+        try
         {
-            Character chara = characterLookup[splitString[0]];
-            try
+            if (splitString.Length > 0 && chara.emotions != null && chara.emotions.ContainsKey(splitString[1]))
             {
-                if (splitString.Length > 0 && chara.emotions != null && chara.emotions.ContainsKey(splitString[1]))
-                {
-                    toShow = chara.emotions[splitString[1]];
-                }
-                else
-                {
-                    toShow = chara.emotions["default"];
-                }
+                toShow = chara.emotions[splitString[1]];
             }
-            catch (KeyNotFoundException e)
+            else
             {
-                Debug.LogError("no portrait " + e.Message);
-                //use mystery/broken portrait
+                toShow = chara.emotions["default"];
             }
         }
-        else
+        catch (KeyNotFoundException e)
         {
-            toShow = defaultEmotion;
+            Debug.LogError("no portrait " + e.Message);
+            //use mystery/broken portrait
         }
-        showEmotion(defaultEmotion);
-        //use font/color/name/whatever
-        //check resources for full string
-        //look for parenthesized filename?
-        //set character name / text type (font, color, whatever) based on character?
-        //could have a series of lookups that link to character type and sub-emotion
+    }
+    else
+    {
+        toShow = defaultEmotion;
+    }
+    showEmotion(defaultEmotion);
+    //use font/color/name/whatever
+    //check resources for full string
+    //look for parenthesized filename?
+    //set character name / text type (font, color, whatever) based on character?
+    //could have a series of lookups that link to character type and sub-emotion
 
-    */
-    
+*/
+
 
 }

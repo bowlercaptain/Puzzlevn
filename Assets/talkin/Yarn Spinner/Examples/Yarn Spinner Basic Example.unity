@@ -922,7 +922,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sourceText:
-  - {fileID: 4900000, guid: 725625e2cc80064448cc7c5d05fab416, type: 3}
+  - {fileID: 4900000, guid: 7a0cc7e897d6b4bd2a1042f854a75acf, type: 3}
   variableStorage: {fileID: 1491325595}
   dialogueUI: {fileID: 1491325594}
   startNode: Start

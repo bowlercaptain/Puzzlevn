@@ -1,6 +1,22 @@
-﻿/*
 
-The MIT License (MIT)
+__   __                 _____       _                       
+\ \ / /                /  ___|     (_)                      
+ \ V /__ _ _ __ _ __   \ `--. _ __  _ _ __  _ __   ___ _ __ 
+  \ // _` | '__| '_ \   `--. \ '_ \| | '_ \| '_ \ / _ \ '__|
+  | | (_| | |  | | | | /\__/ / |_) | | | | | | | |  __/ |   
+  \_/\__,_|_|  |_| |_| \____/| .__/|_|_| |_|_| |_|\___|_|   
+                             | |                            
+                             |_|                            
+
+-------------------------------------------------------------
+
+Yarn Spinner is an interpreter for the Yarn interactive dialogue language, written in C#.
+
+For more information on Yarn Spinner, including tutorials on how to get started, check out the project's page on GitHub: https://github.com/thesecretlab/YarnSpinner
+
+LICENSE:
+
+Yarn Spinner is distributed under the MIT License.
 
 Copyright (c) 2015 Secret Lab Pty. Ltd. and Yarn Spinner contributors.
 
@@ -21,42 +37,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
-*/
-
-using UnityEngine;
-using System.Collections;
-
-namespace Yarn.Unity.Example {
-
-	[RequireComponent (typeof (SpriteRenderer))]
-	public class SpriteSwitcher : MonoBehaviour {
-
-		[System.Serializable]
-		public struct SpriteInfo {
-			public string name;
-			public Sprite sprite;
-		}
-
-		public SpriteInfo[] sprites;
-
-		[YarnCommand("setsprite")]
-		public void UseSprite(string spriteName) {
-
-			Sprite s = null;
-			foreach(var info in sprites) {
-				if (info.name == spriteName) {
-					s = info.sprite;
-					break;
-				}
- 			}
-			if (s == null) {
-				Debug.LogErrorFormat("Can't find sprite named {0}!", spriteName);
-				return;
-			}
-
-			GetComponent<SpriteRenderer>().sprite = s;
-		}
-	}
-
-}

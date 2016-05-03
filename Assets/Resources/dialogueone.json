@@ -2,7 +2,7 @@
 	{
 		"title": "Start",
 		"tags": "",
-		"body": "<<place left Jack>>\n<<place right Jill>>\nJack:What's your name?\n-> Red\n    That's nice.\n-> Jack\n    Jack.Angry:NOT AGAIN\n-> Not telling you.\n<<emote Jack dapper>>\nJill:dialogue\nmore dialogue\n\nSo, what's up?\n[[Oh, nothing.|Nothing]]\n[[yeah, whatever|node3]]",
+		"body": "<<place left Jack>>\n<<place right Jill>>\nJack:What's your name?\n-> Red\n    That's nice.\n-> Jack\n    Jack.Angry:NOT AGAIN\n-> Not telling you.\n<<emote Jack dapper>>\nJill.happy:dialogue\n<<emote Jack broken>>\nmore dialogue\n\nSo, what's up?\n[[Oh, nothing.|Nothing]]\n[[yeah, whatever|node3]]",
 		"position": {
 			"x": 549,
 			"y": 271

@@ -65,6 +65,7 @@ namespace Yarn.Unity {
 		}
 
 		private List<CheckerResult> checkResults = new List<CheckerResult>();
+		private IEnumerable<Yarn.Analysis.Diagnosis> diagnoses = new List<Yarn.Analysis.Diagnosis>();
 
 		void UpdateJSONList() {
 			// Find all TextAssets
@@ -72,6 +73,7 @@ namespace Yarn.Unity {
 			var list = AssetDatabase.FindAssets("t:textasset");
 
 			checkResults.Clear();
+			diagnoses = new List<Yarn.Analysis.Diagnosis>();;
 
 			foreach (var guid in list) {
 
@@ -85,7 +87,6 @@ namespace Yarn.Unity {
 				}
 
 			}
-
 		}
 
 		[MenuItem("Window/Yarn Spinner %#y", false, 2000)]
@@ -114,6 +115,28 @@ namespace Yarn.Unity {
 
 			foreach (var result in checkResults) {
 				DrawScriptGUI (result);
+			}
+
+			// Draw any diagnoses that resulted
+			foreach (var diagnosis in diagnoses) {
+
+				MessageType messageType;
+
+				switch (diagnosis.severity) {
+				case Yarn.Analysis.Diagnosis.Severity.Error:
+					messageType = MessageType.Error;
+					break;
+				case Yarn.Analysis.Diagnosis.Severity.Warning:
+					messageType = MessageType.Warning;
+					break;
+				case Yarn.Analysis.Diagnosis.Severity.Note:
+					messageType = MessageType.Info;
+					break;
+				default:
+					throw new System.ArgumentOutOfRangeException ();
+				}
+
+				EditorGUILayout.HelpBox(diagnosis.ToString(showSeverity:false), messageType);
 			}
 
 			// Bottom box
@@ -170,6 +193,7 @@ namespace Yarn.Unity {
 
 				EditorGUI.indentLevel -= 2;
 			}
+
 		}
 
 		// Finds all .JSON files, and validates them.
@@ -177,19 +201,42 @@ namespace Yarn.Unity {
 		{
 			UpdateJSONList();
 
+			var analysisContext = new Yarn.Analysis.Context();
+
+			bool shouldPerformAnalysis = true;
+
 			foreach (var result in checkResults) {
 
 				CheckerResult.State state;
 
-				var messages = ValidateFile(result.script, out state);
+				var messages = ValidateFile(result.script, analysisContext, out state);
 
 				result.state = state;
 				result.messages = messages;
+
+				// Don't perform whole-program analysis if any file failed to compile
+				if (result.state != CheckerResult.State.Passed) {
+					shouldPerformAnalysis = false;
+				}
+
 			}
+
+            var results = new List<Yarn.Analysis.Diagnosis>();
+
+
+			if (shouldPerformAnalysis)
+                results.AddRange(analysisContext.FinishAnalysis());
+
+            results.AddRange(AnalyseEnvironment());
+
+            diagnoses = results;
+
 		}
 
+
+
 		// Validates a single script.
-		ValidationMessage[] ValidateFile(TextAsset script, out CheckerResult.State result) {
+		ValidationMessage[] ValidateFile(TextAsset script, Analysis.Context analysisContext, out CheckerResult.State result) {
 
 			var messageList = new List<ValidationMessage>();
 
@@ -222,6 +269,7 @@ namespace Yarn.Unity {
 				dialog.LogErrorMessage(e.Message);
 			}
 
+			dialog.Analyse(analysisContext);
 
 			if (failed) {
 				result = CheckerResult.State.Failed;
@@ -239,6 +287,68 @@ namespace Yarn.Unity {
 
 			public MessageType type;
 		}
+
+        struct Deprecation {
+            public System.Type type;
+            public string methodName;
+            public string usageNotes;
+
+            public Deprecation (System.Type type, string methodName, string usageNotes)
+            {
+                this.type = type;
+                this.methodName = methodName;
+                this.usageNotes = usageNotes;
+            }
+            
+        }
+
+        IEnumerable<Yarn.Analysis.Diagnosis> AnalyseEnvironment ()
+        {
+
+            var deprecations = new List<Deprecation>();
+
+            deprecations.Add(new Deprecation(
+                typeof(Yarn.Unity.VariableStorageBehaviour),
+                "SetNumber",
+                "This method is obsolete, and will not be called in future versions of Yarn Spinner. Use SetValue instead."
+            ));
+
+            deprecations.Add(new Deprecation(
+                typeof(Yarn.Unity.VariableStorageBehaviour),
+                "GetNumber",
+                "This method is obsolete, and will not be called in future versions of Yarn Spinner. Use GetValue instead."
+            ));
+
+            var results = new List<Yarn.Analysis.Diagnosis>();
+
+            var assemblies = System.AppDomain.CurrentDomain.GetAssemblies();
+
+
+            foreach (var assembly in assemblies) {
+                foreach (var type in assembly.GetTypes()) {
+
+                    foreach (var deprecation in deprecations) {
+                        if (!type.IsSubclassOf (deprecation.type))
+                            continue;
+
+                        foreach (var method in type.GetMethods ()) {
+                            if (method.Name == deprecation.methodName && method.DeclaringType == type) {
+                                var message = "{0} implements the {1} method. {2}";
+                                message = string.Format (message, type.Name, deprecation.methodName, deprecation.usageNotes);
+                                var diagnosis = new Yarn.Analysis.Diagnosis (message, Yarn.Analysis.Diagnosis.Severity.Warning);
+                                results.Add (diagnosis);
+                            }
+                        }
+
+                    }
+
+
+
+                }
+            }
+            return results;
+        }
+
 	}
 
 	// Icons used by this editor window.
