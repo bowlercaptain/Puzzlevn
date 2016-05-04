@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Yarn.Unity;
 
 [RequireComponent(typeof(MeshRenderer))]
 public class CharacterRend : MonoBehaviour
@@ -19,42 +20,82 @@ public class CharacterRend : MonoBehaviour
         set { rend.material.color = value; }
     }
 
+
+
     MeshRenderer rend;
     void Awake()
     {
+        Debug.Log("setting rend");
+
         rend = GetComponent<MeshRenderer>();
     }
 
-    bool running = false;
-    List<List<Animation>> steps;
+    List<Dictionary<string, Animation>> steps = new List<Dictionary<string, Animation>>();
 
     bool forceFinish = false;
 
-    public IEnumerator RunRoutine()//incomplete?
+    public void AddUnique(Animation toAdd)
+    {
+        Add(toAdd.GetHashCode().ToString(), toAdd);
+    }
+
+    public void Add(string tag, Animation toAdd)
+    {
+        AddWithDelay(tag, toAdd, 0);
+    }
+
+    public void AddWithDelay(string tag, Animation toAdd, int delay)
+    {
+        toAdd.animation = WaitOneFrameThenRun(toAdd.Start);
+        while (steps.Count <= delay) { steps.Add(new Dictionary<string, Animation>()); }
+        steps[delay][tag] = toAdd;//overwrite same tag
+        if (!isRunning) { StartCoroutine(RunRoutine()); }
+    }
+
+    private IEnumerator WaitOneFrameThenRun(Action toRun)
     {
         yield return null;
+        toRun();
+    }
+
+    private List<string> toRemove = new List<string>();
+
+    bool isRunning = false;
+    public IEnumerator RunRoutine()//incomplete?
+    {
+        isRunning = true;
         while (steps.Count > 0)
         {
-            foreach (Animation anim in steps[0])
+            foreach (Animation anim in steps[0].Values)
             {
                 anim.Start();
             }
             while (steps[0].Count > 0)
             {
-                for (int i = 0; i < steps[0].Count; i++)
+                foreach (string tag in steps[0].Keys)
                 {
-                    var anim = steps[0][i];
-                    if (!anim.animation.MoveNext() || forceFinish) 
+                    var anim = steps[0][tag];
+                    if (!anim.animation.MoveNext() || forceFinish)
                     {
                         anim.Finish();
-                        steps[0].RemoveAt(i);
+                        toRemove.Add(tag);
                     }
                 }
+                if (toRemove.Count > 0)
+                {
+                    foreach (string tag in toRemove)
+                    {
+                        steps[0].Remove(tag);
+                    }
+                    toRemove = new List<string>();
+                }
+
                 yield return null;
             }
             steps.RemoveAt(0);
         }
-
+        isRunning = false;
+        yield return null;
     }
 
     public class Animation
@@ -71,6 +112,12 @@ public class CharacterRend : MonoBehaviour
         }
         public virtual IEnumerator animate() { yield break; }//can be interrupted at any time, must not leave the
         public virtual void Finish() { }//Set the renderer into a "Finished" state. This may be called, and the Animation interrupted and inclomplete, at any frame (including the 0th).
+    }
+
+    [YarnCommand("FlipOut")]
+    public void FlipOutA()
+    {
+        Add("Rotation", new FlipOut(this));
     }
 
     public class FlipOut : Animation
@@ -92,6 +139,62 @@ public class CharacterRend : MonoBehaviour
         }
     }
 
+    [YarnCommand("FadeUp")]
+    public void FadeUpA()
+    {
+        Add("Color", new FadeUp(this));
+    }
+
+    public class FadeUp : Animation
+    {
+        public FadeUp(CharacterRend me) : base(me) { }
+
+        public override IEnumerator animate()
+        {
+            Color startColor = me.color;
+            for (int i = 0; i < 100; i++)
+            {
+                Debug.Log("Fading in");
+                me.color = Color.Lerp(startColor, Color.white, i / 100f);
+                yield return null;
+            }
+        }
+
+        public override void Finish()
+        {
+            me.color = Color.white;
+        }
+    }
+
+    [YarnCommand("FadeDown")]
+    public void FadeDownA()
+    {
+        Add("Color", new FadeDown(this));
+    }
+
+    public class FadeDown : Animation
+    {
+        public FadeDown(CharacterRend me) : base(me) { }
+
+        public override IEnumerator animate()
+        {
+            Color startColor = me.color;
+            for (int i = 0; i < 100; i++)
+            {
+
+                Debug.Log("Fading out");
+                me.color = Color.Lerp(startColor, Color.grey, i / 100f);
+                yield return null;
+            }
+        }
+
+        public override void Finish()
+        {
+            me.color = Color.grey;
+        }
+    }
+
+    //Todo: write a slot-changing animation.
 }
 
 

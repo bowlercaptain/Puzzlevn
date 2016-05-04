@@ -9,7 +9,7 @@ public class PortraitDisplay : MonoBehaviour
         right = 1
     }
     public CharacterRend[] rends;
-    string[] slotChars;
+    string[] slotChars;//name cache left in place so we don't have to do a million null checks. slot-changing animations should make sure this doesn't desync
 
     public void Awake()
     {
@@ -27,6 +27,7 @@ public class PortraitDisplay : MonoBehaviour
         if (slotChars[slot] != charName)//yes this is actually necessary
         {
             slotChars[slot] = charName;
+            rends[slot].name =charName;
             SetEmotion(slot, "default");//so this doesn't run when you're just going back to a character and want the right font.
         }
     }

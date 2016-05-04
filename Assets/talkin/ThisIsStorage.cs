@@ -14,16 +14,20 @@ public class ThisIsStorage : VariableStorageBehaviour
 
     public override void SetValue(string variableName, Value value)
     {
-        PlayerPrefs.SetString("Yarn" + variableName, value.ToString());
+        Debug.Log(variableName + " requested stored "+value.type);
+        PlayerPrefs.SetString("Yarn" + variableName, value.AsString);
         PlayerPrefs.SetInt("Yarn" + variableName + "type", (int)value.type);
     }
 
     public override Value GetValue(string variableName)
     {
-
+        Debug.Log(variableName + " requested");
+        Debug.Log((Value.Type)PlayerPrefs.GetInt("Yarn" + variableName + "type", (int)Value.Type.Null));
         switch ((Value.Type)PlayerPrefs.GetInt("Yarn" + variableName + "type", (int)Value.Type.Null))//the inside code is quite fragile; if you have a variable type you should also have a value. adding defaults would not be hard but will do more masking than fixing.
         {
             case Value.Type.Bool:
+                Debug.Log("returning bool");
+                Debug.Log(PlayerPrefs.GetString("Yarn" + variableName));
                 return new Value(bool.Parse(PlayerPrefs.GetString("Yarn" + variableName)));
             case Value.Type.Number:
                 return new Value(float.Parse(PlayerPrefs.GetString("Yarn" + variableName)));
