@@ -45,5 +45,4 @@ public class ThisIsStorage : VariableStorageBehaviour
         Debug.Log("clearing");
         //throw new System.NotImplementedException();
     }
-
 }

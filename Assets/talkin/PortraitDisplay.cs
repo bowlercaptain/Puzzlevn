@@ -8,7 +8,7 @@ public class PortraitDisplay : MonoBehaviour
         left = 0,
         right = 1
     }
-    public MeshRenderer[] rends;
+    public CharacterRend[] rends;
     string[] slotChars;
 
     public void Awake()
@@ -60,7 +60,7 @@ public class PortraitDisplay : MonoBehaviour
         {
             toShow = Resources.Load<Texture>("Characters/fallback");
         }
-        rends[slot].material.mainTexture = toShow;
+        rends[slot].texture = toShow;
     }
 
     public void HighlightCharacter(string character)
@@ -86,13 +86,13 @@ public class PortraitDisplay : MonoBehaviour
     public void FadeOut(int slot)
     {
         if (rends[slot] != null)
-            rends[slot].material.color = Color.grey;
+            rends[slot].color = Color.grey;
     }
 
     public void FadeIn(int slot)
     {
         if (rends[slot] != null)
-            rends[slot].material.color = Color.white;//send a fade-to-color animation to the appropriate manager; override previous fades. (animation slots? animation tags? non-uniqueness somehow.
+            rends[slot].color = Color.white;//send a fade-to-color animation to the appropriate manager; override previous fades. (animation slots? animation tags? non-uniqueness somehow.
     }
 
     public void FadeOut(string character)
