@@ -194,7 +194,31 @@ public class CharacterRend : MonoBehaviour
         }
     }
 
-    //Todo: write a slot-changing animation.
+    //Todo: figure out how to get slot position from name.
+    [YarnCommand("MoveSlot")]
+    public void MoveSlotA(string slotName)
+    {
+        Add("Slot", new MoveSlot(this, slotName));
+    }
+
+    public class MoveSlot : Animation
+    { 
+        public MoveSlot(CharacterRend me, string slotName) : base(me) {
+            destSlot = slotName;
+        }
+
+        private string destSlot;
+        public override IEnumerator animate()
+        {
+            yield return null;
+        }
+
+        public override void Finish()
+        {
+            //portraitdisplay.setCharacter(CharacterRend me, slotIndexFromName(slotName));
+        }
+    }
+
 }
 
 
