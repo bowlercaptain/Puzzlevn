@@ -86,7 +86,7 @@ public class ThisIsUI : DialogueUIBehaviour {
         string[] splitCommand = command.text.Split(' ');//command.text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
         if (splitCommand[0] == "place") {
             Debug.Log("Running show");
-        portrait.SetCharacter((PortraitDisplay.RendName)Enum.Parse(typeof(PortraitDisplay.RendName), splitCommand[1]), splitCommand[2]);//figure this out later;
+        portrait.SetCharacter(splitCommand[1], splitCommand[2]);//figure this out later;
             portrait.SetEmotion(splitCommand[2], "default");
         }
         if(splitCommand[0] == "emote")

@@ -1,8 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
+
 public class PortraitDisplay : MonoBehaviour
 {
+
+    public GameObject rendPrefab;
+
     public enum RendName
     {
         left = 0,
@@ -16,14 +21,40 @@ public class PortraitDisplay : MonoBehaviour
         slotChars = new string[rends.Length];
     }
 
+    public void PlaceCharacter(string slotName, CharacterRend rend)
+    {
+        PlaceCharacter((RendName)Enum.Parse(typeof(RendName), slotName), rend);
+    }
+
+    public void PlaceCharacter(RendName name, CharacterRend rend)
+    {
+        PlaceCharacter((int)name, rend);
+    }
+
+    public void PlaceCharacter(int slot, CharacterRend rend)
+    {
+        rends[slot] = rend;
+        slotChars[slot] = rend.name;
+    }
+
+    public void SetCharacter(string slotName, string charName)
+    {
+        SetCharacter((RendName)Enum.Parse(typeof(RendName), slotName), charName);
+    }
+
     public void SetCharacter(RendName name, string charName)
     {
-        Debug.Log("setting character " + name.ToString() + " " + charName);
         SetCharacter((int)name, charName);
     }
 
     public void SetCharacter(int slot, string charName)
     {
+        if(rends[slot] == null)
+        {
+            //TODO: probably objectFactory this but fuck it
+            rends[slot] = Instantiate(rendPrefab).GetComponent<CharacterRend>();
+            Debug.Log("TODO: Place renderer correctly here. If you want an entry animation, you should command that manually.");
+        }
         if (slotChars[slot] != charName)//yes this is actually necessary
         {
             slotChars[slot] = charName;

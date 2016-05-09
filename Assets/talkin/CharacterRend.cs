@@ -202,7 +202,7 @@ public class CharacterRend : MonoBehaviour
     }
 
     public class MoveSlot : Animation
-    { 
+    {
         public MoveSlot(CharacterRend me, string slotName) : base(me) {
             destSlot = slotName;
         }
@@ -211,10 +211,13 @@ public class CharacterRend : MonoBehaviour
         public override IEnumerator animate()
         {
             yield return null;
+            //TODO: move towards slot location.
         }
 
         public override void Finish()
         {
+            //FIXME: don't find that's a scrub move make a static reference in the class to the current instance
+            FindObjectOfType<PortraitDisplay>().PlaceCharacter(destSlot, me);
             //portraitdisplay.setCharacter(CharacterRend me, slotIndexFromName(slotName));
         }
     }
