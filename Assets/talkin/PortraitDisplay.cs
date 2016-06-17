@@ -15,6 +15,7 @@ public class PortraitDisplay : MonoBehaviour
     }
     public CharacterRend[] rends;
     string[] slotChars;//name cache left in place so we don't have to do a million null checks. slot-changing animations should make sure this doesn't desync
+    public Vector3[] slotLocations;
 
     public void Awake()
     {
