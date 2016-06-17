@@ -5,15 +5,22 @@ using Yarn.Unity;
 using System;
 using UnityEngine.UI;
 
-public class ThisIsUI : DialogueUIBehaviour {
+public class ThisIsUI : DialogueUIBehaviour
+{
 
     public Text output;
     public Text charName;
 
     public PortraitDisplay portrait;
 
+    public Transform buttonsPanel;
+    public GameObject choiceButton;
+    public GameObject spacer;
+    public GameObject halfSpacer;
+
     // Display a line.
-    public override IEnumerator RunLine(Yarn.Line line) {
+    public override IEnumerator RunLine(Yarn.Line line)
+    {
         if (line.text.Contains(":"))
         {
             string title = line.text.Substring(0, line.text.IndexOf(':'));
@@ -29,14 +36,15 @@ public class ThisIsUI : DialogueUIBehaviour {
                 portrait.HighlightCharacter(title.Split('.')[0]);
             }
             output.text = text;
-        } else
+        }
+        else
         {
             output.text = line.text;
         }
         //break by :
         //build command and send to RunCommand to change emotions if necessary. Then Apply Shading?
         Debug.Log(line.text);
-        
+
         yield return null;
         //yield break;
 
@@ -52,48 +60,66 @@ public class ThisIsUI : DialogueUIBehaviour {
     {
 
         Debug.Log("Running Options");
-        output.text = "";
+        //output.text = "";
         int len = optionsCollection.options.Count;
+        Instantiate(halfSpacer).transform.SetParent(buttonsPanel);
+        bool[] doneBox = new bool[] { false };
         for (int i = 0; i < len; i++)
         {
-            output.text += (i+1).ToString() + ": " + optionsCollection.options[i];
+            if (i != 0)
+            {
+                Instantiate(spacer).transform.SetParent(buttonsPanel);
+            }
+            GameObject buttonObject = Instantiate(choiceButton);
+            buttonObject.GetComponentInChildren<Text>().text = optionsCollection.options[i];
+            int hold = i;//yes this is necessary http://stackoverflow.com/questions/3168375/using-the-iterator-variable-of-foreach-loop-in-a-lambda-expression-why-fails
+            buttonObject.GetComponent<Button>().onClick.AddListener(() => { optionChooser(hold); doneBox[0] = true; });
+            buttonObject.transform.SetParent(buttonsPanel);
+            //output.text += (i+1).ToString() + ": " + optionsCollection.options[i];
         }
+        Instantiate(halfSpacer).transform.SetParent(buttonsPanel);
         foreach (string option in optionsCollection.options)
         {
             Debug.Log(option);
         }
-        bool done = false;
-        while (!done)
+        //bool done = false;
+        while (!doneBox[0])
         {
             for (int i = 0; i < len; i++)
             {
-                if (Input.GetKey((i+1).ToString()))
+                if (Input.GetKey((i + 1).ToString()))
                 {
                     optionChooser(i);
-                    done = true;
+                    doneBox[0] = true;
                 }
             }
-            
-            //optionChooser(0);
+
+
             yield return null;
+        }
+        foreach (Transform child in buttonsPanel)
+        {
+            Destroy(child.gameObject);
         }
         yield break;
     }
 
     // Perform some game-specific command.
-    public override IEnumerator RunCommand(Yarn.Command command) {
-        Debug.Log("Run command: "+command.text);
+    public override IEnumerator RunCommand(Yarn.Command command)
+    {
+        Debug.Log("Run command: " + command.text);
         string[] splitCommand = command.text.Split(' ');//command.text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-        if (splitCommand[0] == "place") {
+        if (splitCommand[0] == "place")
+        {
             Debug.Log("Running show");
-        portrait.SetCharacter(splitCommand[1], splitCommand[2]);//figure this out later;
+            portrait.SetCharacter(splitCommand[1], splitCommand[2]);//figure this out later;
             portrait.SetEmotion(splitCommand[2], "default");
         }
-        if(splitCommand[0] == "emote")
+        if (splitCommand[0] == "emote")
         {
             portrait.SetEmotion(splitCommand[1], splitCommand[2]);
         }
-        
+
         //fuck animation (for now)
         //"move <character> <slot>"
         //move <slot> <slot>
@@ -103,10 +129,10 @@ public class ThisIsUI : DialogueUIBehaviour {
         //fuck shading:
         //shade <character/slot>
         //light <character/slot>
-        
+
         //figure out pixelchibi animations? need to make pixelchibiland first.
-        
-        
+
+
         yield return null;
     }
 
@@ -148,7 +174,7 @@ public class ThisIsUI : DialogueUIBehaviour {
                 character = portrait.GetCharacter(slot);
             }
         }
-        if(emotion != null)
+        if (emotion != null)
         {
             portrait.SetEmotion(character, emotion);
         }
@@ -157,19 +183,19 @@ public class ThisIsUI : DialogueUIBehaviour {
         //{
         //    format = Resources.Load<DialogueCharacter>("Characters/"+character + "/" + emotion);
         //} if format == null && character != null)
-        if(character!=null)
+        if (character != null)
         {
-            format = Resources.Load<DialogueCharacter>("Characters/" + character + "/"+character);
-            
+            format = Resources.Load<DialogueCharacter>("Characters/" + character + "/" + character);
+
         }
-        if(format == null)
+        if (format == null)
         {
             Debug.Log("Using default; could not find " + character);
             format = defaultFormat;
         }
         format.name = character;
         ShowFormat(format);
-        
+
     }
 
     public void ShowFormat(DialogueCharacter format)
