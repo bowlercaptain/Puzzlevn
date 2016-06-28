@@ -8,6 +8,8 @@ using UnityEngine.UI;
 public class ThisIsUI : DialogueUIBehaviour
 {
 
+    public System.Action callBack;
+
     public Text output;
     public Text charName;
 
@@ -146,6 +148,7 @@ public class ThisIsUI : DialogueUIBehaviour
     // The conversation has ended.
     public override IEnumerator DialogueComplete()
     {
+        if (callBack != null) { callBack(); }
         Debug.Log("complete");
         // Default implementation does nothing.
         yield break;
