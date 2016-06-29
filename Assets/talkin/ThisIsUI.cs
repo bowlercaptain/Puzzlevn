@@ -8,6 +8,8 @@ using UnityEngine.UI;
 public class ThisIsUI : DialogueUIBehaviour
 {
 
+    public System.Action callBack;
+
     public Text output;
     public Text charName;
 
@@ -43,7 +45,7 @@ public class ThisIsUI : DialogueUIBehaviour
         }
         //break by :
         //build command and send to RunCommand to change emotions if necessary. Then Apply Shading?
-        Debug.Log(line.text);
+        //Debug.Log(line.text);
 
         yield return null;
         //yield break;
@@ -78,10 +80,10 @@ public class ThisIsUI : DialogueUIBehaviour
             //output.text += (i+1).ToString() + ": " + optionsCollection.options[i];
         }
         Instantiate(halfSpacer).transform.SetParent(buttonsPanel);
-        foreach (string option in optionsCollection.options)
-        {
-            Debug.Log(option);
-        }
+        //foreach (string option in optionsCollection.options)
+        //{
+        //    Debug.Log(option);
+        //}
         //bool done = false;
         while (!doneBox[0])
         {
@@ -139,23 +141,23 @@ public class ThisIsUI : DialogueUIBehaviour
     // The node has ended.
     public override IEnumerator NodeComplete(string nextNode)
     {
-        // Default implementation does nothing.
+
         yield break;
     }
 
     // The conversation has ended.
     public override IEnumerator DialogueComplete()
     {
-        Debug.Log("complete");
-        // Default implementation does nothing.
+        if (callBack != null) { callBack(); }
+
         yield break;
     }
 
     // A conversation has started.
     public override IEnumerator DialogueStarted()
     {
-        Debug.Log("started.");
-        // Default implementation does nothing.
+       
+
         yield break;
     }
 
