@@ -97,6 +97,7 @@ GameObject:
   - 61: {fileID: 182089913}
   - 50: {fileID: 182089912}
   - 114: {fileID: 182089916}
+  - 114: {fileID: 182089917}
   m_Layer: 0
   m_Name: New Sprite
   m_TagString: Untagged
@@ -196,6 +197,17 @@ MonoBehaviour:
   - {fileID: 1495510417}
   - {fileID: 1654376774}
   - {fileID: 1770072454}
+--- !u!114 &182089917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 182089911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e78dd7ee2ee4794d8280914ad0e111a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &404650430
 GameObject:
   m_ObjectHideFlags: 0
@@ -366,7 +378,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 974471995}
   - 212: {fileID: 974471994}
-  - 61: {fileID: 974471993}
   m_Layer: 0
   m_Name: land
   m_TagString: Untagged
@@ -374,20 +385,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!61 &974471993
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 974471992}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
 --- !u!212 &974471994
 SpriteRenderer:
   m_ObjectHideFlags: 0
