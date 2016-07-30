@@ -9,15 +9,20 @@ public class Feeter : MonoBehaviour {
 	int stIndex;
 	int endIndex;
 
-	// Use this for initialization
-	void Start() {
-		float offset = -feets.Length / 2f;
+    // Use this for initialization
+    void Start() {
+        if (feets.Length < 1){
+            this.enabled = false;
+            return;
+    }
+        float offset = -feets.Length / 2f;
 		foreach (Transform foot in feets) {
 			foot.position = transform.position + new Vector3(offset * standingSpread, 0, 0);
 			offset += 1f;
 		}
 		stIndex = 0;
 		endIndex = feets.Length-1;
+
 	}
 
 	// Update is called once per frame
