@@ -30,6 +30,7 @@ public class PortraitDisplay : MonoBehaviour {
 	public Vector3[] slotLocations;
 
 	public void Awake() {
+		rends = new CharacterRend[slotList.Count];
 		slotChars = new string[rends.Length];
 	}
 
