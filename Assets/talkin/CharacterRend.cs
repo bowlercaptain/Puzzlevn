@@ -137,6 +137,43 @@ public class CharacterRend : MonoBehaviour
         }
     }
 
+	    [YarnCommand("Enter")]
+    public void EnterA(string dir)
+    {
+        Add("Entry", new Enter(this,dir));
+    }
+
+    public class Enter : Animation
+    {
+		string dir;
+        public Enter(CharacterRend me, string dir) : base(me) { this.dir = dir; origPos = me.transform.position; }
+
+		Vector3 origPos;
+        public override IEnumerator animate()
+        {
+			Dictionary<string, Vector3> offsetdirs = new Dictionary<string, Vector3>() {
+			{"up",Vector3.up },
+			{"down",Vector3.down },
+			{"left",Vector3.left },
+			{"right",Vector3.right }
+			};
+			Vector3 offSetDir = offsetdirs[dir] / 35f;
+
+			
+            for (int i = 200; i >=0; i--)
+            {
+				me.transform.position = origPos + offSetDir * i; 
+                yield return null;
+            }
+        }
+
+        public override void Finish()
+        {
+            me.transform.position = origPos;
+        }
+    }
+
+
     [YarnCommand("FadeUp")]
     public void FadeUpA()
     {
