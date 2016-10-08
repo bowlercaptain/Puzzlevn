@@ -124,7 +124,7 @@ public class CharacterRend : MonoBehaviour
 
         public override IEnumerator animate()
         {
-            for (int i = 0; i < 360; i++)
+            for (int i = 0; i < 360; i+=4)
             {
                 me.transform.rotation = Quaternion.Euler(0, 0, i);
                 yield return null;
