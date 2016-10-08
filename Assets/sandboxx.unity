@@ -133,8 +133,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e78dd7ee2ee4794d8280914ad0e111a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 0}
   jumpHeight: 20
   runSpeed: 40
+  currJumps: 1
 --- !u!212 &182089914
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -195,6 +197,8 @@ MonoBehaviour:
   standingSpread: 0
   maxStep: 0
   feets: []
+  stIndex: 0
+  endIndex: 0
 --- !u!54 &182089917
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -298,7 +302,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 404650430}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1af2cbf6b5bb5054b89b6b65e8249cfa, type: 3}
   m_Name: 
