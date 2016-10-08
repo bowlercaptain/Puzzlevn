@@ -13,6 +13,9 @@ public class ThisIsUI : DialogueUIBehaviour
     public Text output;
     public Text charName;
 
+	public GameObject textParent;
+	public GameObject nameParent;//this is dumb, Unity should let me sort UI children behind their parents.
+
     public PortraitDisplay portrait;
 
     public Transform buttonsPanel;
@@ -122,6 +125,15 @@ public class ThisIsUI : DialogueUIBehaviour
             portrait.SetEmotion(splitCommand[1], splitCommand[2]);
         }
 
+		if (splitCommand[0] == "hideText") {
+			textParent.SetActive(false);
+			nameParent.SetActive(false);
+			while (!Input.GetKeyDown(KeyCode.Space)) {
+				yield return null;
+			}
+			textParent.SetActive(true);
+			nameParent.SetActive(true);
+		}
         //fuck animation (for now)
         //"move <character> <slot>"
         //move <slot> <slot>
