@@ -59,8 +59,9 @@ public class ThisIsUI : DialogueUIBehaviour
         }
     }
 
-    // Display the options, and call the optionChooser when done.
-    public override IEnumerator RunOptions(Yarn.Options optionsCollection,
+	int[] doneBox;
+	// Display the options, and call the optionChooser when done.
+	public override IEnumerator RunOptions(Yarn.Options optionsCollection,
                                             Yarn.OptionChooser optionChooser)
     {
 
@@ -68,7 +69,7 @@ public class ThisIsUI : DialogueUIBehaviour
         //output.text = "";
         int len = optionsCollection.options.Count;
         Instantiate(halfSpacer).transform.SetParent(buttonsPanel);
-        bool[] doneBox = new bool[] { false };
+        doneBox = new int[] { -1 };
         for (int i = 0; i < len; i++)
         {
             if (i != 0)
@@ -77,37 +78,42 @@ public class ThisIsUI : DialogueUIBehaviour
             }
             GameObject buttonObject = Instantiate(choiceButton);
             buttonObject.GetComponentInChildren<Text>().text = optionsCollection.options[i];
-            int hold = i;//yes this is necessary http://stackoverflow.com/questions/3168375/using-the-iterator-variable-of-foreach-loop-in-a-lambda-expression-why-fails
-            buttonObject.GetComponent<Button>().onClick.AddListener(() => { optionChooser(hold); doneBox[0] = true; });
+			var cb = buttonObject.GetComponent<ChoiceButton>();
+			cb.ui = this;
+			cb.index = i;
             buttonObject.transform.SetParent(buttonsPanel);
             //output.text += (i+1).ToString() + ": " + optionsCollection.options[i];
         }
         Instantiate(halfSpacer).transform.SetParent(buttonsPanel);
-        //foreach (string option in optionsCollection.options)
-        //{
-        //    Debug.Log(option);
-        //}
-        //bool done = false;
-        while (!doneBox[0])
+
+        while (doneBox[0] == -1)
         {
             for (int i = 0; i < len; i++)
             {
                 if (Input.GetKey((i + 1).ToString()))
                 {
-                    optionChooser(i);
-                    doneBox[0] = true;
+                    
+                    doneBox[0] = i;
                 }
             }
 
+			
 
             yield return null;
         }
-        foreach (Transform child in buttonsPanel)
+		optionChooser(doneBox[0]);
+		foreach (Transform child in buttonsPanel)
         {
             Destroy(child.gameObject);
         }
         yield break;
     }
+
+
+	public void AcceptChoice(int index) {//all of C# is stabbed. Straight stabbed.
+		doneBox[0] = index;
+
+	}
 
     // Perform some game-specific command.
     public override IEnumerator RunCommand(Yarn.Command command)

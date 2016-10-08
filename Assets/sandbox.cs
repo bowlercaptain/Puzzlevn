@@ -3,7 +3,7 @@ using System.Collections;
 
 public class sandbox : MonoBehaviour {
 
-    bool flag = false;
+    //bool flag = false;
 
 	// Use this for initialization
 	void Start () {

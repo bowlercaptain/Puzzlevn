@@ -25,8 +25,6 @@ public class CharacterRend : MonoBehaviour
     MeshRenderer rend;
     void Awake()
     {
-        Debug.Log("setting rend");
-
         rend = GetComponent<MeshRenderer>();
     }
 

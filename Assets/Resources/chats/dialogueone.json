@@ -2,9 +2,9 @@
 	{
 		"title": "Start",
 		"tags": "",
-		"body": "<<place left Jack>>\n<<place right Jill>>\nJack:What's your name?\n-> Red\n    That's nice.\n    <<FadeUp Jill>>\n-> Jack\n    Jack.Angry:NOT AGAIN\n-> Not telling you.\n<<emote Jack dapper>>\nJill.happy:dialogue\n<<FadeDown Jill>>\n<<emote Jack broken>>\nmore dialogue\n\nSo, what's up?\n[[Oh, nothing.|Nothing]]\n[[yeah, whatever|node3]]",
+		"body": "<<place left Jack>>\n\nJack:What's your name?\n-> Red\n    That's nice.\n    <<FadeUp Jack>>\n-> Jack\n    Jack.Angry:NOT AGAIN\n-> Not telling you.\n<<emote Jack dapper>>\nJack.happy:dialogue\n<<FadeDown Jack>>\n<<emote Jack broken>>\nmore dialogue\n\nSo, what's up?\n[[Oh, nothing.|Nothing]]\n\n[[yeah, whatever|node3]]\n\n[[Lotsa stuff|EVERYTHING]]",
 		"position": {
-			"x": 549,
+			"x": 553,
 			"y": 271
 		},
 		"colorID": 0
@@ -12,7 +12,7 @@
 	{
 		"title": "Nothing",
 		"tags": "",
-		"body": "That's cool.\n\nSo....\nYeah.\n\nJack: dialogue\nJill: dia:logue\njack:dialgoue\n(char):dialogue\nmore dialogue\nmore:dialogue\n~more dialogue\n...more dialogue\n...:more dialogue\n~:more dialogue",
+		"body": "That's cool.\n\nSo....\nYeah.\n\n<<place right Jack>>\n<<place left Jill>>\n\nJack: dialogue\nJill: dia:logue\njack:dialgoue\n(char):dialogue\nmore dialogue\nmore:dialogue\n~more dialogue\n...more dialogue\n...:more dialogue\n~:more dialogue",
 		"position": {
 			"x": 951,
 			"y": 362
