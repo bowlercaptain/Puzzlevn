@@ -19,8 +19,8 @@ public class PortraitDisplay : MonoBehaviour {
 	}
 
 	private Dictionary<string, Slot> slotList = new Dictionary<string, Slot>()  {
-	{ "left", new Slot(0,new Vector3(-3.1f,-0.06f,0),new Vector3(5f,5f,1f))},
-	{ "right", new Slot(1,new Vector3(2.44f,-0.06f,0),new Vector3(5f,5f,1f))},
+	{ "left", new Slot(0,new Vector3(-3.1f,-0.06f,0),new Vector3(5f,10f,1f))},
+	{ "right", new Slot(1,new Vector3(2.44f,-0.06f,0),new Vector3(5f,10f,1f))},
 	{ "background", new Slot(2,new Vector3(0,0,0),new Vector3(20f,20f,1f))}
 	};
 

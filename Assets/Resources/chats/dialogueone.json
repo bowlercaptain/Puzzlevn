@@ -2,9 +2,9 @@
 	{
 		"title": "Start",
 		"tags": "",
-		"body": "<<place left Jack>>\n\nJack:What's your name?\n-> Red\n    That's nice.\n    <<FadeUp Jack>>\n-> Jack\n    Jack.Angry:NOT AGAIN\n-> Not telling you.\n<<emote Jack dapper>>\nJack.happy:dialogue\n<<FadeDown Jack>>\n<<emote Jack broken>>\nmore dialogue\n\nSo, what's up?\n[[Oh, nothing.|Nothing]]\n\n[[yeah, whatever|node3]]\n\n[[Lotsa stuff|EVERYTHING]]",
+		"body": "<<place left June>>\n\nJack:What's your name?\n-> Red\n    That's nice.\n    <<FadeUp Jack>>\n-> Jack\n    Jack.Angry:NOT AGAIN\n-> Not telling you.\n<<emote Jack dapper>>\nJack.happy:dialogue\n<<FadeDown Jack>>\n<<emote Jack broken>>\nmore dialogue\n\nSo, what's up?\n[[Oh, nothing.|Nothing]]\n\n[[yeah, whatever|node3]]\n\n[[Lotsa stuff|EVERYTHING]]",
 		"position": {
-			"x": 553,
+			"x": 554,
 			"y": 271
 		},
 		"colorID": 0
