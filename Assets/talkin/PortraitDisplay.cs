@@ -43,7 +43,6 @@ public class PortraitDisplay : MonoBehaviour {
 	}
 
 	public void SetCharacter(string slotName, string charName) {
-		Debug.Log(slotName);
 		SetCharacter(slotList[slotName], charName);
 	}
 

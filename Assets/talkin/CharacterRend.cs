@@ -146,7 +146,7 @@ public class CharacterRend : MonoBehaviour
     public class Enter : Animation
     {
 		string dir;
-        public Enter(CharacterRend me, string dir) : base(me) { this.dir = dir; origPos = me.transform.position; }
+        public Enter(CharacterRend me, string dir) : base(me) { this.dir = dir; origPos = me.transform.position; me.transform.position = Vector3.up * 1000f;Debug.Log("Enter anim constructor"); }
 
 		Vector3 origPos;
         public override IEnumerator animate()
