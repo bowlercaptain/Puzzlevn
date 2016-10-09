@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿//#define adorb
+
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System;
@@ -7,7 +9,7 @@ public class PortraitDisplay : MonoBehaviour {
 
 	public GameObject rendPrefab;
 
-	private struct Slot {
+	public struct Slot {
 		public Slot(int slotNum, Vector3 position, Vector3 scale) {
 			this.slotNum = slotNum;
 			this.position = position;
@@ -19,8 +21,8 @@ public class PortraitDisplay : MonoBehaviour {
 	}
 
 	private Dictionary<string, Slot> slotList = new Dictionary<string, Slot>()  {
-	{ "left", new Slot(0,new Vector3(-3.1f,2.6f,0),new Vector3(5f,12.7984084881f,1f))},
-	{ "right", new Slot(1,new Vector3(2.44f,2.6f,0),new Vector3(5f,12.7984084881f,1f))},
+	{ "left", new Slot(0,new Vector3(-4.14f,2.6f,0),new Vector3(5f,12.7984084881f,1f))},
+	{ "right", new Slot(1,new Vector3(3.54f,2.6f,0),new Vector3(5f,12.7984084881f,1f))},
 	{ "center", new Slot(2,new Vector3(0f,2.6f,0),new Vector3(5f,12.7984084881f,1f))},
 	{ "background", new Slot(3,new Vector3(0,0,0),new Vector3(20f,20f,1f))}
 	};
@@ -43,19 +45,25 @@ public class PortraitDisplay : MonoBehaviour {
 		slotChars[slot.slotNum] = rend.name;
 	}
 
-	public void SetCharacter(string slotName, string charName) {
-		SetCharacter(slotList[slotName], charName);
+	public void SetCharacter(string slotName, string charName, string showHide="show") {
+		SetCharacter(slotList[slotName], charName, showHide);
 	}
 
-	public void SetCharacter(int slotNum, string charName) {
-		SetCharacter(GetSlot(slotNum), charName);
+	public void SetCharacter(int slotNum, string charName, string showHide = "show") {
+		SetCharacter(GetSlot(slotNum), charName, showHide);
 	}
 
-	private void SetCharacter(Slot slot, string charName) {
+	private void SetCharacter(Slot slot, string charName, string showHide = "show") {
 		if (rends[slot.slotNum] == null) {
 			//TODO: probably objectFactory this but fuck it
 			rends[slot.slotNum] = Instantiate(rendPrefab).GetComponent<CharacterRend>();
 			PositionRend(rends[slot.slotNum], slot);
+			if(showHide=="hide") {
+			#if adorb
+			rends[slot.slotNum].transform.localRotation = Quaternion.Euler(0,0,90) ;
+#endif
+				rends[slot.slotNum].transform.position = Vector3.up * 1000;
+			} 
         }
 		if (slotChars[slot.slotNum] != charName)//yes this is actually necessary
 		{
@@ -69,6 +77,7 @@ public class PortraitDisplay : MonoBehaviour {
 		Transform rendTransform = rend.transform;
 		rendTransform.position = slot.position;
 		rendTransform.localScale = slot.scale;
+		rend.targetSlot = slot;
 	}
 
 	public string GetCharacter(int slot) {

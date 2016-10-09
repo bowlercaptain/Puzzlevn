@@ -20,7 +20,7 @@ public class CharacterRend : MonoBehaviour
         set { rend.material.color = value; }
     }
 
-
+	public PortraitDisplay.Slot targetSlot;
 
     MeshRenderer rend;
     void Awake()
@@ -146,9 +146,8 @@ public class CharacterRend : MonoBehaviour
     public class Enter : Animation
     {
 		string dir;
-        public Enter(CharacterRend me, string dir) : base(me) { this.dir = dir; origPos = me.transform.position; me.transform.position = Vector3.up * 1000f;Debug.Log("Enter anim constructor"); }
+        public Enter(CharacterRend me, string dir) : base(me) { this.dir = dir; }
 
-		Vector3 origPos;
         public override IEnumerator animate()
         {
 			Dictionary<string, Vector3> offsetdirs = new Dictionary<string, Vector3>() {
@@ -162,14 +161,14 @@ public class CharacterRend : MonoBehaviour
 			
             for (int i = 200; i >=0; i--)
             {
-				me.transform.position = origPos + offSetDir * i; 
+				me.transform.position = me.targetSlot.position + offSetDir * i; 
                 yield return null;
             }
         }
 
         public override void Finish()
         {
-            me.transform.position = origPos;
+            me.transform.position = me.targetSlot.position;
         }
     }
 
