@@ -8,8 +8,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a417137d251417c4e9d51aa47d36a3d5, type: 3}
-  m_Name: P
-  m_EditorClassIdentifier: Assembly-CSharp::JackScript
+  m_Script: {fileID: 11500000, guid: 7ee91e00567d7164590654bf77956e12, type: 3}
+  m_Name: p
+  m_EditorClassIdentifier: 
   textColor: {r: 0.9882353, g: 0.9411765, b: 0.6627451, a: 1}
   textFont: {fileID: 0}
