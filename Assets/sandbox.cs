@@ -16,7 +16,7 @@ public class sandbox : MonoBehaviour {
         //    PlayerPrefs.SetInt("testt", 1);
         //    PlayerPrefs.Save();
         //}
-        DialogueView.Show("dayone");
+        DialogueView.Show("testscript");
 	}
 	
 	//// Update is called once per frame

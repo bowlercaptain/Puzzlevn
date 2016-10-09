@@ -122,7 +122,7 @@ public class ThisIsUI : DialogueUIBehaviour
         string[] splitCommand = command.text.Split(' ');//command.text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
         if (splitCommand[0] == "place")
         {
-            portrait.SetCharacter(splitCommand[1], splitCommand[2]);//figure this out later;
+            portrait.SetCharacter(splitCommand[1], splitCommand[2], (splitCommand.Length>=4?splitCommand[3]:"show"));//figure this out later;
             portrait.SetEmotion(splitCommand[2], "default");
         }
         if (splitCommand[0] == "emote")
