@@ -139,20 +139,20 @@ public class ThisIsUI : DialogueUIBehaviour
 			textParent.SetActive(true);
 			nameParent.SetActive(true);
 		}
-        //fuck animation (for now)
-        //"move <character> <slot>"
-        //move <slot> <slot>
-        //animate <character> <animation>
-        //animate <slot> <animation>
+		//fuck animation (for now)
+		//"move <character> <slot>"
+		//move <slot> <slot>
+		//animate <character> <animation>
+		//animate <slot> <animation>
 
-        //fuck shading:
-        //shade <character/slot>
-        //light <character/slot>
+		//fuck shading:
+		//shade <character/slot>
+		//light <character/slot>
 
-        //figure out pixelchibi animations? need to make pixelchibiland first.
+		//figure out pixelchibi animations? need to make pixelchibiland first.
 
 
-        yield return null;
+		yield break;// return null;
     }
 
     // The node has ended.
