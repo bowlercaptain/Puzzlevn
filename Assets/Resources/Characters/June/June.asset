@@ -11,5 +11,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a417137d251417c4e9d51aa47d36a3d5, type: 3}
   m_Name: June
   m_EditorClassIdentifier: 
-  textColor: {r: 0.38235295, g: 0.7444219, b: 1, a: 1}
+  textColor: {r: 0.68235296, g: 0.84313726, b: 0.9882353, a: 1}
   textFont: {fileID: 0}

@@ -53,7 +53,7 @@ public class ThisIsUI : DialogueUIBehaviour
         yield return null;
         //yield break;
 
-        while (!Input.GetKeyDown(KeyCode.Space))
+        while (!CheckContinue())
         {
             yield return null;
         }
@@ -137,7 +137,7 @@ public class ThisIsUI : DialogueUIBehaviour
 		if (splitCommand[0] == "hideText") {
 			textParent.SetActive(false);
 			nameParent.SetActive(false);
-			while (!Input.GetKeyDown(KeyCode.Space)) {
+			while (!CheckContinue()) {
 				yield return null;
 			}
 			textParent.SetActive(true);
