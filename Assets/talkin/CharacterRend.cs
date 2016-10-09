@@ -156,12 +156,12 @@ public class CharacterRend : MonoBehaviour
 			{"left",Vector3.left },
 			{"right",Vector3.right }
 			};
-			Vector3 offSetDir = offsetdirs[dir] / 35f;
+			Vector3 offSetDir = offsetdirs[dir] * 10f;
 
 			
-            for (int i = 200; i >=0; i--)
+            for (float i = (float)Math.PI/2f; i >=0; i-=1/60f)
             {
-				me.transform.position = me.targetSlot.position + offSetDir * i; 
+				me.transform.position = me.targetSlot.position + offSetDir * (1-Mathf.Cos(i)); 
                 yield return null;
             }
         }

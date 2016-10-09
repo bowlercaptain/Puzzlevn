@@ -59,6 +59,10 @@ public class ThisIsUI : DialogueUIBehaviour
         }
     }
 
+	private bool CheckContinue() {
+		return Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0) || Input.GetButtonDown("Fire1") || Input.GetButtonDown("Jump") || Input.GetButtonDown("Submit");
+	}
+
 	int[] doneBox;
 	// Display the options, and call the optionChooser when done.
 	public override IEnumerator RunOptions(Yarn.Options optionsCollection,
