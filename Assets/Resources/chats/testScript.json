@@ -1,0 +1,22 @@
+[
+	{
+		"title": "Start",
+		"tags": "",
+		"body": "???: YooooooOooOOOOOOOO~!!!! *crash*\r\nP: …\r\n<<place right Becky hide>>\r\n<<place center Sammy>>\r\n<<place left June>>\r\n<<Enter Becky right>>\r\n???: …\r\n<<emote Becky smug>>\r\n<<FadeUp Becky>>\r\nP: …..\r\n<<FadeUp Becky>>\r\n???: *stands and brushes self off* [Matter of factly] \r\n<<FadeUp Becky>>\r\nHey Protag, are you from Damascus?\r\n<<FadeUp Becky>>\r\nBecause you’re looking as sharp as steel.\r\nP: … Becky. \r\nBecky.open: Yes?\r\nP: … Nevermind.\r\nBecky: You sure?\r\nP: Anyways… how’d your late night rendezvous go?\r\nBecky.default: Oh, we chatted for a little while. You know, tested the waters.\r\nBecky: And we really hit it off, right? Like, we talked for a good 45 minutes. So then I-\r\nP: So it didn’t work out.\r\nBecky.smug: Eh!? I didn’t even say anyth-\r\nP: You know what you did.\r\nBecky.default: Geh.\r\nP: So? What happened after that?\r\nBecky: Turns out she really doesn’t like the idea of using a kazoo to-\r\nP: You don’t say. \r\n:*DING DONG THE FUCKING BELL*\r\nP: Oh wait! We’re meeting up with June and Sammy after school today, right? At that cat café?\r\nBecky: Yup! I’ll meet ya after class, okay? See ya!\r\n[[Node2]]",
+		"position": {
+			"x": 389,
+			"y": 70
+		},
+		"colorID": 0
+	},
+	{
+		"title": "Node2",
+		"tags": "",
+		"body": "<<place background Darkness>>\r\n<<place right Invisible>>\r\nProbably Becky: GUESS WHO?!?\r\n->Becky.\r\n    <<place right becky>>\r\n    Becky: Yaaaay! You’re right!\r\n-> June? \r\n    <<place right becky>>\r\n    Becky: Erm… you actually… um… didn’t get that right.\r\n    P: Whoops.\r\n    Becky: You do know it’s me right? Right?\r\n->It can’t be… but… Sammy?\r\n    <<place right becky>>\r\n    Becky: Erm… you actually… um… didn’t get that right.\r\n    P: Whoops.\r\n    Becky: You do know it’s me right? Right?\r\n->EVERYTHING IS DARKNESS.\r\n    <<place right becky>>\r\n    Becky: Whoa! Calm down friend, it’s me…\r\n    Becky: DARKNESS.\r\n    P: …\r\n    Becky: O-oh. It is me. Becky. For realsies.\r\nP: As if it could be anyone else.\r\nBecky: You know it! Btw, weren’t you working at the Tangy Chicken just down the way? How’s that going?\r\nP: Oh you know. The usual. Dealing with people. Dealing with broken equipment. Dealing with more people. Dealing with stupid policies.\r\nBecky: Yikes…\r\nP: Oh, and don’t let me forget about the CONSTANT INTERMINABLE LAYER OF TANGY SAUCE THAT PERMEATES ALL FABRIC EXISTENCES.\r\nBecky: Do you get free chicken?\r\nP: No. We get one (1) 12oz soda.\r\nJune: Hey guys! Come in, I got a table already!\r\n",
+		"position": {
+			"x": 502,
+			"y": 388
+		},
+		"colorID": 0
+	}
+]
