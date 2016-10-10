@@ -1,0 +1,9 @@
+#!/bin/sh
+echo "executing post-commit"
+D:/wares/Unity/Editor/Unity.exe -batchmode -quit -projectpath D:/projects/puzzlevn -buildWindowsPlayer D:/shit/CATegorical/CATegorical.exe
+echo "built"
+#.git/hooks/7-Zip/7z a D:/shit/Steme/Windows.zip D:/shit/Steme.exe
+#.git/hooks/7-Zip/7z a D:/shit/Steme/Windows.zip D:/shit/Steme_Data
+#echo "archived"
+.git/hooks/butler push D:/CATegorical breakfastparty/CATegorical:windows
+echo "pushed!"
