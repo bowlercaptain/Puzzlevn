@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class JapaneseNato
 {
-    public string lookup(char key)
+    public static string lookup(char key)
     {
         switch (key) //this is a hashtable once compiled I promise http://stackoverflow.com/questions/268084/creating-a-constant-dictionary-in-c-sharp
         {
@@ -41,7 +41,7 @@ public class JapaneseNato
         }
     }
 
-    public string Encode(string toEncode)
+    public static string Encode(string toEncode)
     {
         string result = "";
         foreach(char letter in toEncode.ToCharArray())
