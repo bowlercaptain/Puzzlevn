@@ -35,3 +35,6 @@ TestResults/
 
 # Unity3D Generated File On Crash Reports
 sysinfo.txt
+
+#Compiled test files
+tests/KusoTest/KusoTest/bin/
