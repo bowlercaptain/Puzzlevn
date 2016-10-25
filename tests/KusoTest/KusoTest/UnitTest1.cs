@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
+using System.Reflection;
+//using UnityEngine;
 
 namespace KusoTest {
 	[TestClass]
@@ -12,5 +13,16 @@ namespace KusoTest {
 		Assert.IsTrue(Equals(JapaneseNato.Encode("hi"), "ホテルインド"));
 
         }
+
+		[TestMethod]
+		public void TestAnimationCosntsss() {
+			//Assert.IsTrue(typeof(CharacterRend) == typeof(CharacterRend));
+			var typee = typeof(CharacterRend.Hop);
+			var fieldd = typee.GetField("HOPDURATION",BindingFlags.NonPublic|BindingFlags.Static);
+			var vall = fieldd.GetValue(null);
+            Assert.IsTrue((float)(vall) != 0f);
+
+			Assert.AreNotEqual<float>(0f, (float)(typeof(CharacterRend.Hop).GetField("HOPHEIGHT",BindingFlags.NonPublic | BindingFlags.Static).GetValue(null)));
+		}
 	}
 }
