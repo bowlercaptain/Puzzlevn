@@ -256,6 +256,30 @@ public class CharacterRend : MonoBehaviour
         }
     }
 
+	
+
+	[YarnCommand("Hop")]
+	public void HopA() {
+		Add("Hop", new Hop(this));
+	}
+
+	public class Hop : Animation {
+		const float HOPDURATION = .25f;
+		const float HOPHEIGHT = 30f;
+		public Hop(CharacterRend me) : base(me) { }
+
+		public override IEnumerator animate() {
+			for (float i = 0; i <=1 ; i += Time.deltaTime / HOPDURATION) {
+				me.transform.position = me.targetSlot.position + HOPHEIGHT * Vector3.up * ( i - i*i);
+				yield return null;
+			}
+		}
+
+		public override void Finish() {
+			me.transform.position = me.targetSlot.position;
+		}
+	}
+
 }
 
 
