@@ -143,12 +143,17 @@ public class ThisIsUI : DialogueUIBehaviour
 			textParent.SetActive(true);
 			nameParent.SetActive(true);
 		}
-		//fuck animation (for now)
+
+		if(splitCommand[0] == "PlaySound") {
+			AudioManager.PlaySound(splitCommand[1],1);
+		}
+
+		if(splitCommand[0] == "PlayUniqueLooping") {
+			AudioManager.PlayUniqueLooping(splitCommand[1], splitCommand[2], 1);
+		}
 		//"move <character> <slot>"
 		//move <slot> <slot>
-		//animate <character> <animation>
-		//animate <slot> <animation>
-
+		
 		//fuck shading:
 		//shade <character/slot>
 		//light <character/slot>
