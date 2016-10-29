@@ -1,6 +1,0 @@
-
-TEST_VAR = hello
-
-echo $TEST_VAR/whaterver
-
-.git/hooks/otherTestScript
