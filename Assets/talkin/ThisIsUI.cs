@@ -40,11 +40,11 @@ public class ThisIsUI : DialogueUIBehaviour
                 ShowPortrait(character: title);
                 portrait.HighlightCharacter(title.Split('.')[0]);
             }
-            output.text = text;
+            output.text = chompLeadingSpace(text);
         }
         else
         {
-            output.text = line.text;
+            output.text = chompLeadingSpace(line.text);
         }
         //break by :
         //build command and send to RunCommand to change emotions if necessary. Then Apply Shading?
@@ -83,7 +83,7 @@ public class ThisIsUI : DialogueUIBehaviour
                 Instantiate(spacer).transform.SetParent(buttonsPanel);
             }
             GameObject buttonObject = Instantiate(choiceButton);
-            buttonObject.GetComponentInChildren<Text>().text = splitTitle[0];
+            buttonObject.GetComponentInChildren<Text>().text = chompLeadingSpace(splitTitle[0]);
             var cb = buttonObject.GetComponent<ChoiceButton>();
             cb.ui = this;
             cb.index = i;
@@ -262,4 +262,10 @@ public class ThisIsUI : DialogueUIBehaviour
         }
     }
 
+
+    static string chompLeadingSpace(string toChomp)
+    {
+        if(toChomp[0]==' ') { return toChomp.Substring(1); }
+        return toChomp;
+    }
 }
