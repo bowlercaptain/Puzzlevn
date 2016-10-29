@@ -10,5 +10,5 @@ set -e
 C:/"Program Files (x86)"/MSBuild/14.0/Bin/MSBuild.exe tests/KusoTest/KusoTest.sln
 C:/"Program Files (x86)"/"Microsoft Visual Studio 14.0"/Common7/IDE/MSTest.exe /testcontainer:tests/KusoTest/KusoTest/bin/Debug/KusoTest.dll
 
-.git/hooks/butler push D:/shit/YuriJam breakfastparty/YuriJam2016:windows-beta
+.git/hooks/butler push D:/shit/YuriJam breakfastparty/YuriJam2016:windows
 echo "pushed!"
