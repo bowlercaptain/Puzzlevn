@@ -56,7 +56,6 @@ public class ThisIsUI : DialogueUIBehaviour
         {
             
             output.text = goalText.Substring(0, i);
-            Debug.Log("Lettering");
             //Todo: play voice letter clip.
             yield return null;//todo: sloooow down (waitforseconds or catch up to a timestamp)
 

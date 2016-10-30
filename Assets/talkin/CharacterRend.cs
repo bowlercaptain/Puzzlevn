@@ -172,60 +172,66 @@ public class CharacterRend : MonoBehaviour
         }
     }
 
-
+    const float highlightScaleFactor = 1.3f;
+    const float highlightFadeTime = .366f;
     [YarnCommand("FadeUp")]
     public void FadeUpA()
     {
-        Add("Color", new FadeUp(this));
-    }
-
-    public class FadeUp : Animation
-    {
-        public FadeUp(CharacterRend me) : base(me) { }
-
-        public override IEnumerator animate()
-        {
-            Color startColor = me.color;
-            for (int i = 0; i < 100; i++)
-            {
-                Debug.Log("Fading in");
-                me.color = Color.Lerp(startColor, Color.white, i / 100f);
-                yield return null;
-            }
-        }
-
-        public override void Finish()
-        {
-            me.color = Color.white;
-        }
+        Add("Color", new FadeScale(this, this.targetSlot.scale*highlightScaleFactor));
+        Add("Size", new FadeColor(this, Color.white));
     }
 
     [YarnCommand("FadeDown")]
     public void FadeDownA()
     {
-        Add("Color", new FadeDown(this));
+        Add("Color", new FadeScale(this, this.targetSlot.scale));
+        Add("Size", new FadeColor(this, Color.grey));
     }
 
-    public class FadeDown : Animation
+    public class FadeColor : Animation
     {
-        public FadeDown(CharacterRend me) : base(me) { }
-
+        public FadeColor(CharacterRend me, Color targetColor) : base(me) { this.targetColor = targetColor; }
+        Color targetColor;
         public override IEnumerator animate()
         {
             Color startColor = me.color;
-            for (int i = 0; i < 100; i++)
+            for (float i = 0; i < 1f; i+=Time.deltaTime/highlightFadeTime)
             {
-                Debug.Log("Fading out");
-                me.color = Color.Lerp(startColor, Color.grey, i / 100f);
+                Debug.Log("Fading in");
+                me.color = Color.Lerp(startColor, targetColor, i);
                 yield return null;
             }
         }
 
         public override void Finish()
         {
-            me.color = Color.grey;
+            me.color = targetColor;
         }
     }
+
+
+
+    public class FadeScale : Animation
+    {
+        public FadeScale(CharacterRend me, Vector3 targetScale) : base(me) { this.targetScale = targetScale; }
+        Vector3 targetScale;
+        public override IEnumerator animate()
+        {
+            Vector3 startScale = me.transform.localScale;
+            for (float i = 0; i < 1f; i+=Time.deltaTime/highlightFadeTime)
+            {
+                me.transform.localScale = Vector3.Lerp(startScale, targetScale, i);
+                yield return null;
+            }
+        }
+
+        public override void Finish()
+        {
+            me.transform.localScale=targetScale;
+        }
+    }
+
+
 
     [YarnCommand("Hide")]
     public void HideA()
