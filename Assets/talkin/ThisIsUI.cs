@@ -29,7 +29,7 @@ public class ThisIsUI : DialogueUIBehaviour
         string goalText;
         if (line.text.Contains(":"))
         {
-            string title = line.text.Substring(0, line.text.IndexOf(':'));
+            string title = line.text.Substring(0, line.text.IndexOf(':')).ToLowerInvariant();
             string text = line.text.Substring(line.text.IndexOf(':') + 1);
             if (title.Split('.').Length > 1)
             {
@@ -159,48 +159,52 @@ public class ThisIsUI : DialogueUIBehaviour
     {
         Debug.Log("Run command: " + command.text);
         string[] splitCommand = command.text.Split(' ');//command.text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-        if (splitCommand[0] == "place")
-        {
-            portrait.SetCharacter(splitCommand[1], splitCommand[2], (splitCommand.Length >= 4 ? splitCommand[3] : "show"));//figure this out later;
-            portrait.SetEmotion(splitCommand[2], "default");
-        }
-        if (splitCommand[0] == "emote")
-        {
-            portrait.SetEmotion(splitCommand[1], splitCommand[2]);
-        }
 
-        if (splitCommand[0] == "hideText")
+        switch (splitCommand[0].ToLowerInvariant())
         {
-            textParent.SetActive(false);
-            nameParent.SetActive(false);
-            while (!CheckContinue())
-            {
-                yield return null;
-            }
-            textParent.SetActive(true);
-            nameParent.SetActive(true);
-        }
+            case "place":
+                {
+                    portrait.SetCharacter(splitCommand[1].ToLowerInvariant(), splitCommand[2].ToLowerInvariant(), (splitCommand.Length >= 4 ? splitCommand[3].ToLowerInvariant() : "show"));//figure this out later;
+                    portrait.SetEmotion(splitCommand[2].ToLowerInvariant(), "default");
+                }
+                break;
+            case "emote":
+                {
+                    portrait.SetEmotion(splitCommand[1].ToLowerInvariant(), splitCommand[2].ToLowerInvariant());
+                }
+                break;
+            case "hidetext":
+                {
+                    textParent.SetActive(false);
+                    nameParent.SetActive(false);
+                    while (!CheckContinue())
+                    {
+                        yield return null;
+                    }
+                    textParent.SetActive(true);
+                    nameParent.SetActive(true);
+                }
+                break;
 
-        if (splitCommand[0] == "PlaySound")
-        {
-            AudioManager.PlaySound(splitCommand[1], 1);
-        }
+            case "playsound":
+                {
+                    AudioManager.PlaySound(splitCommand[1], 1);
+                }
+                break;
 
-        if (splitCommand[0] == "PlayUniqueLooping")
-        {
-            AudioManager.PlayUniqueLooping(splitCommand[1], splitCommand[2], 1);
+            case "playuniquelooping":
+                {
+                    AudioManager.PlayUniqueLooping(splitCommand[1], splitCommand[2], 1);
+                }
+                break;
+            default:
+                Debug.LogError("Unknown command " + splitCommand[0]);
+                break;
         }
         //"move <character> <slot>"
         //move <slot> <slot>
 
-        //fuck shading:
-        //shade <character/slot>
-        //light <character/slot>
-
-        //figure out pixelchibi animations? need to make pixelchibiland first.
-
-
-        yield break;// return null;
+        yield break;
     }
 
     // The node has ended.

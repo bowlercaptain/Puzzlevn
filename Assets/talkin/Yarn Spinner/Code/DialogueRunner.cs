@@ -231,7 +231,7 @@ namespace Yarn.Unity
 
 			var commandName = words[0];
 
-			var objectName = words[1];
+			var objectName = words[1].ToLowerInvariant();//THIS IS CUSTOM CODE FOR OUR GAME. DO NOT PULL REQUEST IT.
 
 			var sceneObject = GameObject.Find(objectName);
 
@@ -266,23 +266,38 @@ namespace Yarn.Unity
 
 							// Verify that this method has the right number of parameters
 							var methodParameters = method.GetParameters();
-
-							if (methodParameters.Length != parameters.Count) {
-								Debug.LogErrorFormat(sceneObject, "Method \"{0}\" wants to respond to Yarn command \"{1}\", but it has a different number of parameters ({2}) to those provided ({3})!", method.Name, commandName, methodParameters.Length, parameters.Count);
-								return false;
+							bool paramsMatch = false;
+							if (methodParameters.Length == parameters.Count)
+							{
+								paramsMatch = true;
+								foreach (var paramInfo in methodParameters)
+								{
+									if (!paramInfo.ParameterType.IsAssignableFrom(typeof(string)))
+									{
+										paramsMatch = false;
+										break;
+									}
+								}   
 							}
-
-							// Verify that this method has only string parameters (or no parameters)
-							foreach (var paramInfo in methodParameters) {
-								if (paramInfo.ParameterType.IsAssignableFrom(typeof(string)) == false) {
-									Debug.LogErrorFormat(sceneObject, "Method \"{0}\" wants to respond to Yarn command \"{1}\", but not all of its parameters are strings!", method.Name, commandName);
-									return false;
-								}
+							if (methodParameters.Length == 1)//normal commands may also be length 1
+							{
+								// Verify that this method has one string array parameter (or a params array)
+								
+									if (methodParameters[0].ParameterType.IsAssignableFrom(typeof(string[])))
+									{
+									paramsMatch = true;
+									}
+								
 							}
-
-							// Cool, we can send the command!
-							method.Invoke(component, parameters.ToArray());
-							numberOfMethodsFound ++;
+							if (paramsMatch)
+							{
+								// Cool, we can send the command!
+								method.Invoke(component, parameters.ToArray());
+								numberOfMethodsFound++;
+							} else
+							{
+								Debug.LogErrorFormat(sceneObject, "Method \"{0}\" wants to respond to Yarn command \"{1}\", but it has a different number of parameters ({2}) to those provided ({3}), or is not a string array!", method.Name, commandName, methodParameters.Length, parameters.Count);
+							}
 
 						}
 					}
