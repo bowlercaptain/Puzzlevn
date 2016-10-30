@@ -8,7 +8,11 @@ export workingFolder=C:/Users/Robert/Downloads/deleteme
 export projectFolder=C:/Users/Robert/Documents/Puzzlevn
 export MSBuildLocation=C:/"Program Files (x86)"/MSBuild/14.0/Bin/MSBuild.exe
 export MSTestLocation=C:/"Program Files (x86)"/"Microsoft Visual Studio 14.0"/Common7/IDE/MSTest.exe
-#export itchURL=breakfastparty/YuriJam2016
-#export projectName=YuriJam
-export itchURL=breakfastparty/CATegorical
-export projectName=CATegorical
+
+#Yuri Jam 2016
+export itchURL=breakfastparty/YuriJam2016
+export projectName=YuriJam
+
+#Kusoge
+#export itchURL=breakfastparty/CATegorical
+#export projectName=CATegorical
