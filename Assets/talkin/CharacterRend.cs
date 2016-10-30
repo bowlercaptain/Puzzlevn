@@ -160,7 +160,7 @@ public class CharacterRend : MonoBehaviour
             };
 
             Vector3 offSetDir;
-            Debug.Assert(offsetdirs.TryGetValue(dir, out offSetDir));
+            Debug.Assert(offsetdirs.TryGetValue(dir, out offSetDir),"Enter direction not valid: "+dir);
             offsetdirs.TryGetValue(dir, out offSetDir);
 
 
