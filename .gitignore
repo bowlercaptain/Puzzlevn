@@ -37,7 +37,7 @@ tests/KusoTest/KusoTest/bin/
 thumbs.db
 thumbs.db.meta
 
-!tests/*
-!tests/KusoTest/KusoTest.csproj
 Puzzlevn.CSharp.Editor.csproj
 Puzzlevn.CSharp.csproj
+Puzzlevn.sln
+
