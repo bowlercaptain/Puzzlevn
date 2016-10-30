@@ -1,0 +1,14 @@
+#!/bin/bash
+
+#set -e
+echo "executing build"
+"$unityLocation" -batchmode -quit -projectpath $projectFolder -buildWindowsPlayer $workingFolder/$projectName/$projectName.exe
+
+echo "running tests"
+set -e
+echo skipping tests because they did not exist back now
+echo "$MSBuildLocation" tests/KusoTest/KusoTest.sln
+echo "$MSTestLocation" /testcontainer:tests/KusoTest/KusoTest/bin/Debug/KusoTest.dll
+
+hooks/butler push $workingFolder/$projectName $itchURL:windows$1
+echo "pushed!"
