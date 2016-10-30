@@ -349,6 +349,13 @@ public class CharacterRend : MonoBehaviour
         }
     }
 
+
+    [YarnCommand("CheatyFace")]
+    public void CheatA(params string[] lolll) { foreach (string lol in lolll)//this doesn't work boooooo
+        {
+            Debug.Log(lol);
+        }
+    }
 }
 
 
