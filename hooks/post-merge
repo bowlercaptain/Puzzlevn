@@ -7,14 +7,14 @@ echo running post-merge
 case $CURRENT_BRANCH in
 mastabranch)
   echo merged back into develop
-  .git/hooks/post-flow-feature-finish
+  hooks/post-flow-feature-finish
   ;;
 feature/*)
   echo merged into a feature lol
   ;;
 primetime)
   echo merged into release o shat
-    .git/hooks/post-flow-release-finish
+    hooks/post-flow-release-finish
   ;;
 *)
   echo something else man
