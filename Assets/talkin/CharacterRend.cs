@@ -145,6 +145,8 @@ public class CharacterRend : MonoBehaviour
 
     public class Enter : Animation
     {
+        const float OFFSETMAGNITUDE = 10f;
+
         string dir;
         public Enter(CharacterRend me, string dir) : base(me) { this.dir = dir; }
 
@@ -156,12 +158,15 @@ public class CharacterRend : MonoBehaviour
             {"left",Vector3.left },
             {"right",Vector3.right }
             };
-            Vector3 offSetDir = offsetdirs[dir] * 10f;
+
+            Vector3 offSetDir;
+            Debug.Assert(offsetdirs.TryGetValue(dir, out offSetDir));
+            offsetdirs.TryGetValue(dir, out offSetDir);
 
 
             for (float i = (float)Math.PI / 2f; i >= 0; i -= 1 / 60f)
             {
-                me.transform.position = me.targetSlot.position + offSetDir * (1 - Mathf.Cos(i));
+                me.transform.position = me.targetSlot.position + offSetDir * OFFSETMAGNITUDE * (1 - Mathf.Cos(i));
                 yield return null;
             }
         }
@@ -177,7 +182,7 @@ public class CharacterRend : MonoBehaviour
     [YarnCommand("FadeUp")]
     public void FadeUpA()
     {
-        Add("Color", new FadeScale(this, this.targetSlot.scale*highlightScaleFactor));
+        Add("Color", new FadeScale(this, this.targetSlot.scale * highlightScaleFactor));
         Add("Size", new FadeColor(this, Color.white));
     }
 
@@ -195,7 +200,7 @@ public class CharacterRend : MonoBehaviour
         public override IEnumerator animate()
         {
             Color startColor = me.color;
-            for (float i = 0; i < 1f; i+=Time.deltaTime/highlightFadeTime)
+            for (float i = 0; i < 1f; i += Time.deltaTime / highlightFadeTime)
             {
                 Debug.Log("Fading in");
                 me.color = Color.Lerp(startColor, targetColor, i);
@@ -218,7 +223,7 @@ public class CharacterRend : MonoBehaviour
         public override IEnumerator animate()
         {
             Vector3 startScale = me.transform.localScale;
-            for (float i = 0; i < 1f; i+=Time.deltaTime/highlightFadeTime)
+            for (float i = 0; i < 1f; i += Time.deltaTime / highlightFadeTime)
             {
                 me.transform.localScale = Vector3.Lerp(startScale, targetScale, i);
                 yield return null;
@@ -227,7 +232,7 @@ public class CharacterRend : MonoBehaviour
 
         public override void Finish()
         {
-            me.transform.localScale=targetScale;
+            me.transform.localScale = targetScale;
         }
     }
 
@@ -241,16 +246,16 @@ public class CharacterRend : MonoBehaviour
 
     public class Hide : Animation
     {
-        const float HIDETIME= 1f;
+        const float HIDETIME = 1f;
         public Hide(CharacterRend me) : base(me) { }
 
         public override IEnumerator animate()
         {
             Color startColor = me.color;
-            for (float time = 0f; time < HIDETIME; time+=Time.deltaTime)
+            for (float time = 0f; time < HIDETIME; time += Time.deltaTime)
             {
                 Debug.Log("Fading out");
-                me.color = Color.Lerp(startColor, Color.clear, time/HIDETIME);
+                me.color = Color.Lerp(startColor, Color.clear, time / HIDETIME);
                 yield return null;
             }
         }
@@ -357,7 +362,9 @@ public class CharacterRend : MonoBehaviour
 
 
     [YarnCommand("CheatyFace")]
-    public void CheatA(params string[] lolll) { foreach (string lol in lolll)//this doesn't work boooooo
+    public void CheatA(params string[] lolll)
+    {
+        foreach (string lol in lolll)//this doesn't work boooooo
         {
             Debug.Log(lol);
         }

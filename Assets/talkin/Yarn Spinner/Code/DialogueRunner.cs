@@ -262,7 +262,7 @@ namespace Yarn.Unity
 
 					// Find the YarnCommand whose commandString is equal to the command name
 					foreach (var attribute in attributes) {
-						if (attribute.commandString == commandName) {
+						if (attribute.commandString.ToLowerInvariant() == commandName.ToLowerInvariant()) {
 
 							// Verify that this method has the right number of parameters
 							var methodParameters = method.GetParameters();
