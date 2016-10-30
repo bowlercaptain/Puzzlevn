@@ -27,6 +27,11 @@ public class ThisIsUI : DialogueUIBehaviour
     public override IEnumerator RunLine(Yarn.Line line)
     {
         string goalText;
+        if (line.text[0] == '#')
+        {
+            Debug.LogWarning("Comment found: " + line.text);
+            yield break;
+        }
         if (line.text.Contains(":"))
         {
             string title = line.text.Substring(0, line.text.IndexOf(':')).ToLowerInvariant();
@@ -285,7 +290,7 @@ public class ThisIsUI : DialogueUIBehaviour
 
     static string chompLeadingSpace(string toChomp)
     {
-        if (toChomp[0] == ' ') { return toChomp.Substring(1); }
+        if (toChomp.Length>0 && toChomp[0] == ' ') { return toChomp.Substring(1); }
         return toChomp;
     }
 }
