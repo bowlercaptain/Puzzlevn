@@ -1,10 +1,20 @@
 fileFormatVersion: 2
 guid: 333a6c1011c398d4e9fea4c1b1c1f125
-timeCreated: 1462173660
+timeCreated: 1475926059
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - output: {instanceID: 0}
+  - charName: {instanceID: 0}
+  - textParent: {instanceID: 0}
+  - nameParent: {instanceID: 0}
+  - portrait: {instanceID: 0}
+  - buttonsPanel: {instanceID: 0}
+  - choiceButton: {fileID: 134760, guid: 001c3cfd09071bf469c54fc4e06220fd, type: 2}
+  - spacer: {fileID: 106648, guid: 8173e68caa1266641a496ec68ed39962, type: 2}
+  - halfSpacer: {fileID: 176774, guid: 755b9510db71c9340868ac5ef64e8a0e, type: 2}
+  - defaultFormat: {fileID: 11400000, guid: 7cec25dc4578c8a48bf21211d82f8fb2, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

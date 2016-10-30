@@ -8,7 +8,7 @@ public class ThisIsStorage : VariableStorageBehaviour
 {
     public override void ResetToDefaults()
     {
-        PlayerPrefs.DeleteAll();
+        
         //throw new NotImplementedException();
     }
 
@@ -47,6 +47,6 @@ public class ThisIsStorage : VariableStorageBehaviour
     public override void Clear()
     {
         Debug.Log("clearing");
-        //throw new System.NotImplementedException();
-    }
+		PlayerPrefs.DeleteAll();
+	}
 }

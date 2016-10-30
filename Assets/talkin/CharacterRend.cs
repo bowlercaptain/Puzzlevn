@@ -20,13 +20,11 @@ public class CharacterRend : MonoBehaviour
         set { rend.material.color = value; }
     }
 
-
+	public PortraitDisplay.Slot targetSlot;
 
     MeshRenderer rend;
     void Awake()
     {
-        Debug.Log("setting rend");
-
         rend = GetComponent<MeshRenderer>();
     }
 
@@ -126,7 +124,7 @@ public class CharacterRend : MonoBehaviour
 
         public override IEnumerator animate()
         {
-            for (int i = 0; i < 360; i++)
+            for (int i = 0; i < 360; i+=4)
             {
                 me.transform.rotation = Quaternion.Euler(0, 0, i);
                 yield return null;
@@ -138,6 +136,42 @@ public class CharacterRend : MonoBehaviour
             me.transform.rotation = Quaternion.identity;
         }
     }
+
+	    [YarnCommand("Enter")]
+    public void EnterA(string dir)
+    {
+        Add("Entry", new Enter(this,dir));
+    }
+
+    public class Enter : Animation
+    {
+		string dir;
+        public Enter(CharacterRend me, string dir) : base(me) { this.dir = dir; }
+
+        public override IEnumerator animate()
+        {
+			Dictionary<string, Vector3> offsetdirs = new Dictionary<string, Vector3>() {
+			{"up",Vector3.up },
+			{"down",Vector3.down },
+			{"left",Vector3.left },
+			{"right",Vector3.right }
+			};
+			Vector3 offSetDir = offsetdirs[dir] * 10f;
+
+			
+            for (float i = (float)Math.PI/2f; i >=0; i-=1/60f)
+            {
+				me.transform.position = me.targetSlot.position + offSetDir * (1-Mathf.Cos(i)); 
+                yield return null;
+            }
+        }
+
+        public override void Finish()
+        {
+            me.transform.position = me.targetSlot.position;
+        }
+    }
+
 
     [YarnCommand("FadeUp")]
     public void FadeUpA()

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class sandbox : MonoBehaviour {
 
-    bool flag = false;
+    //bool flag = false;
 
 	// Use this for initialization
 	void Start () {
@@ -16,7 +16,7 @@ public class sandbox : MonoBehaviour {
         //    PlayerPrefs.SetInt("testt", 1);
         //    PlayerPrefs.Save();
         //}
-        DialogueView.Show("dialogueone");
+        DialogueView.Show("dayone", Application.Quit );
 	}
 	
 	//// Update is called once per frame
