@@ -227,6 +227,55 @@ public class CharacterRend : MonoBehaviour
         }
     }
 
+    [YarnCommand("Hide")]
+    public void HideA()
+    {
+        Add("Color", new Hide(this));
+    }
+
+    public class Hide : Animation
+    {
+        const float HIDETIME= 1f;
+        public Hide(CharacterRend me) : base(me) { }
+
+        public override IEnumerator animate()
+        {
+            Color startColor = me.color;
+            for (float time = 0f; time < HIDETIME; time+=Time.deltaTime)
+            {
+                Debug.Log("Fading out");
+                me.color = Color.Lerp(startColor, Color.clear, time/HIDETIME);
+                yield return null;
+            }
+        }
+
+        public override void Finish()
+        {
+            me.color = Color.clear;
+        }
+    }
+
+    [YarnCommand("HideNow")]
+    public void HideNowA()
+    {
+        Add("Color", new HideNow(this));
+    }
+
+    public class HideNow : Animation
+    {
+        public HideNow(CharacterRend me) : base(me) { }
+
+        public override IEnumerator animate()
+        {
+            yield break;
+        }
+
+        public override void Finish()
+        {
+            me.color = Color.clear;
+        }
+    }
+
     //Todo: figure out how to get slot position from name.
     [YarnCommand("MoveSlot")]
     public void MoveSlotA(string slotName)
