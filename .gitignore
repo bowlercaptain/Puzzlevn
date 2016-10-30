@@ -38,3 +38,6 @@ sysinfo.txt
 
 #Compiled test files
 tests/KusoTest/KusoTest/bin/
+
+thumbs.db
+thumbs.db.meta

@@ -23,6 +23,8 @@ namespace KusoTest {
             Assert.IsTrue((float)(vall) != 0f);
 
 			Assert.AreNotEqual<float>(0f, (float)(typeof(CharacterRend.Hop).GetField("HOPHEIGHT",BindingFlags.NonPublic | BindingFlags.Static).GetValue(null)));
+
+			Assert.AreNotEqual<float>(0f, (float)(typeof(CharacterRend.Hide).GetField("HIDETIME",BindingFlags.NonPublic | BindingFlags.Static).GetValue(null)));
 		}
 	}
 }

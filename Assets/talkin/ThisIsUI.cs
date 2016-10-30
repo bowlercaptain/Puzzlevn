@@ -95,6 +95,10 @@ public class ThisIsUI : DialogueUIBehaviour
                 {
                     case "timer":
                         Debug.Assert(splitTitle.Length >= 3);
+#if UNITY_EDITOR
+                        int outt;
+                        Debug.Assert(int.TryParse(splitTitle[2], out outt));
+#endif
                         timerRoutine = StartCoroutine(TimeDelayChoice(i, int.Parse(splitTitle[2])));
                         break;
                 }

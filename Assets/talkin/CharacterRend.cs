@@ -20,7 +20,7 @@ public class CharacterRend : MonoBehaviour
         set { rend.material.color = value; }
     }
 
-	public PortraitDisplay.Slot targetSlot;
+    public PortraitDisplay.Slot targetSlot;
 
     MeshRenderer rend;
     void Awake()
@@ -124,7 +124,7 @@ public class CharacterRend : MonoBehaviour
 
         public override IEnumerator animate()
         {
-            for (int i = 0; i < 360; i+=4)
+            for (int i = 0; i < 360; i += 4)
             {
                 me.transform.rotation = Quaternion.Euler(0, 0, i);
                 yield return null;
@@ -137,31 +137,31 @@ public class CharacterRend : MonoBehaviour
         }
     }
 
-	    [YarnCommand("Enter")]
+    [YarnCommand("Enter")]
     public void EnterA(string dir)
     {
-        Add("Entry", new Enter(this,dir));
+        Add("Entry", new Enter(this, dir));
     }
 
     public class Enter : Animation
     {
-		string dir;
+        string dir;
         public Enter(CharacterRend me, string dir) : base(me) { this.dir = dir; }
 
         public override IEnumerator animate()
         {
-			Dictionary<string, Vector3> offsetdirs = new Dictionary<string, Vector3>() {
-			{"up",Vector3.up },
-			{"down",Vector3.down },
-			{"left",Vector3.left },
-			{"right",Vector3.right }
-			};
-			Vector3 offSetDir = offsetdirs[dir] * 10f;
+            Dictionary<string, Vector3> offsetdirs = new Dictionary<string, Vector3>() {
+            {"up",Vector3.up },
+            {"down",Vector3.down },
+            {"left",Vector3.left },
+            {"right",Vector3.right }
+            };
+            Vector3 offSetDir = offsetdirs[dir] * 10f;
 
-			
-            for (float i = (float)Math.PI/2f; i >=0; i-=1/60f)
+
+            for (float i = (float)Math.PI / 2f; i >= 0; i -= 1 / 60f)
             {
-				me.transform.position = me.targetSlot.position + offSetDir * (1-Mathf.Cos(i)); 
+                me.transform.position = me.targetSlot.position + offSetDir * (1 - Mathf.Cos(i));
                 yield return null;
             }
         }
@@ -215,7 +215,6 @@ public class CharacterRend : MonoBehaviour
             Color startColor = me.color;
             for (int i = 0; i < 100; i++)
             {
-
                 Debug.Log("Fading out");
                 me.color = Color.Lerp(startColor, Color.grey, i / 100f);
                 yield return null;
@@ -228,6 +227,55 @@ public class CharacterRend : MonoBehaviour
         }
     }
 
+    [YarnCommand("Hide")]
+    public void HideA()
+    {
+        Add("Color", new Hide(this));
+    }
+
+    public class Hide : Animation
+    {
+        const float HIDETIME= 1f;
+        public Hide(CharacterRend me) : base(me) { }
+
+        public override IEnumerator animate()
+        {
+            Color startColor = me.color;
+            for (float time = 0f; time < HIDETIME; time+=Time.deltaTime)
+            {
+                Debug.Log("Fading out");
+                me.color = Color.Lerp(startColor, Color.clear, time/HIDETIME);
+                yield return null;
+            }
+        }
+
+        public override void Finish()
+        {
+            me.color = Color.clear;
+        }
+    }
+
+    [YarnCommand("HideNow")]
+    public void HideNowA()
+    {
+        Add("Color", new HideNow(this));
+    }
+
+    public class HideNow : Animation
+    {
+        public HideNow(CharacterRend me) : base(me) { }
+
+        public override IEnumerator animate()
+        {
+            yield break;
+        }
+
+        public override void Finish()
+        {
+            me.color = Color.clear;
+        }
+    }
+
     //Todo: figure out how to get slot position from name.
     [YarnCommand("MoveSlot")]
     public void MoveSlotA(string slotName)
@@ -237,7 +285,8 @@ public class CharacterRend : MonoBehaviour
 
     public class MoveSlot : Animation
     {
-        public MoveSlot(CharacterRend me, string slotName) : base(me) {
+        public MoveSlot(CharacterRend me, string slotName) : base(me)
+        {
             destSlot = slotName;
         }
 
@@ -256,30 +305,57 @@ public class CharacterRend : MonoBehaviour
         }
     }
 
-	
 
-	[YarnCommand("Hop")]
-	public void HopA() {
-		Add("Hop", new Hop(this));
-	}
 
-	public class Hop : Animation {
-		const float HOPDURATION = .25f;
-		const float HOPHEIGHT = 30f;
-		public Hop(CharacterRend me) : base(me) { }
+    [YarnCommand("Hop")]
+    public void HopA()
+    {
+        HopM("1");
+    }
 
-		public override IEnumerator animate() {
-			for (float i = 0; i <=1 ; i += Time.deltaTime / HOPDURATION) {
-				me.transform.position = me.targetSlot.position + HOPHEIGHT * Vector3.up * ( i - i*i);
-				yield return null;
-			}
-		}
+    [YarnCommand("HopMulti")]
+    public void HopM(string times)
+    {
+#if UNITY_EDITOR
+        int outt;
+        Debug.Assert(int.TryParse(times, out outt));
+#endif
+        Add("Hop", new Hop(this, int.Parse(times)));
+    }
 
-		public override void Finish() {
-			me.transform.position = me.targetSlot.position;
-		}
-	}
 
+    public class Hop : Animation
+    {
+        const float HOPDURATION = .25f;
+        const float HOPHEIGHT = 30f;
+        int times;
+        public Hop(CharacterRend me, int times) : base(me) { this.times = times; }
+
+        public override IEnumerator animate()
+        {
+            for (int x = 0; x < times; x++)
+            {
+                for (float i = 0; i <= 1; i += Time.deltaTime / HOPDURATION)
+                {
+                    me.transform.position = me.targetSlot.position + HOPHEIGHT * Vector3.up * (i - i * i);
+                    yield return null;
+                }
+            }
+        }
+
+        public override void Finish()
+        {
+            me.transform.position = me.targetSlot.position;
+        }
+    }
+
+
+    [YarnCommand("CheatyFace")]
+    public void CheatA(params string[] lolll) { foreach (string lol in lolll)//this doesn't work boooooo
+        {
+            Debug.Log(lol);
+        }
+    }
 }
 
 
