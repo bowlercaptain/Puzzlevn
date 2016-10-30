@@ -116,17 +116,16 @@ public class PortraitDisplay : MonoBehaviour
 
     public void SetEmotion(int slot, string charname, string emotion)
     {
-        Texture toShow = Resources.Load<Texture>("Characters/" + charname + "/" + emotion);
+        Texture toShow = Resources.Load<Texture>("characters/" + charname + "/" + emotion);
         if (toShow == null)//skip looking for character default to show that emotion is missing
         {
-            toShow = Resources.Load<Texture>("Characters/fallback");
+            toShow = Resources.Load<Texture>("characters/fallback");
         }
         rends[slot].texture = toShow;
     }
 
     public void HighlightCharacter(string character)
     {
-        Debug.Log("Highlighting char " + character);
         HighlightCharacter(GetSlotNum(character));
     }
 
@@ -135,19 +134,19 @@ public class PortraitDisplay : MonoBehaviour
         Debug.Log("highlighting " + slot.ToString());
         for (int i = 0; i < rends.Length; i++)
         {
-            
-            
-                if (i == slot)
-                {
-                Debug.AssertFormat(rends[i] != null,"Tried to highlight a nulled slot! What?", slot, GetCharacter(slot));
-                    rends[i].FadeUpA();
-                }
-                else
-                {
-                    if (rends[i] != null)
-                        rends[i].FadeDownA();
-                }
-            
+
+
+            if (i == slot)
+            {
+                Debug.AssertFormat(rends[i] != null, "Tried to highlight a nulled slot! What?", slot, GetCharacter(slot));
+                rends[i].FadeUpA();
+            }
+            else
+            {
+                if (rends[i] != null)
+                    rends[i].FadeDownA();
+            }
+
         }
     }
 
