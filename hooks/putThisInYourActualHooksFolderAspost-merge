@@ -1,3 +1,4 @@
 #!/bin/sh
 
+#calls the hook in the main repository, so the build script can be part of the project.
 hooks/post-merge
