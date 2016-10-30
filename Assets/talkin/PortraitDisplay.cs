@@ -135,19 +135,19 @@ public class PortraitDisplay : MonoBehaviour
         Debug.Log("highlighting " + slot.ToString());
         for (int i = 0; i < rends.Length; i++)
         {
-            
-            
-                if (i == slot)
-                {
-                Debug.AssertFormat(rends[i] != null,"Tried to highlight a nulled slot! What?", slot, GetCharacter(slot));
-                    rends[i].FadeUpA();
-                }
-                else
-                {
-                    if (rends[i] != null)
-                        rends[i].FadeDownA();
-                }
-            
+
+
+            if (i == slot)
+            {
+                Debug.AssertFormat(rends[i] != null, "Tried to highlight a nulled slot! What?", slot, GetCharacter(slot));
+                rends[i].FadeUpA();
+            }
+            else
+            {
+                if (rends[i] != null)
+                    rends[i].FadeDownA();
+            }
+
         }
     }
 

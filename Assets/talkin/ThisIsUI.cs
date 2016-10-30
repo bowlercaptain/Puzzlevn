@@ -52,9 +52,9 @@ public class ThisIsUI : DialogueUIBehaviour
         //build command and send to RunCommand to change emotions if necessary. Then Apply Shading?
         //Debug.Log(line.text);
 
-        for(int i = 0; i < goalText.Length; i++)
+        for (int i = 0; i < goalText.Length; i++)
         {
-            
+
             output.text = goalText.Substring(0, i);
             //Todo: play voice letter clip.
             yield return null;//todo: sloooow down (waitforseconds or catch up to a timestamp)
@@ -281,7 +281,7 @@ public class ThisIsUI : DialogueUIBehaviour
 
     static string chompLeadingSpace(string toChomp)
     {
-        if(toChomp[0]==' ') { return toChomp.Substring(1); }
+        if (toChomp[0] == ' ') { return toChomp.Substring(1); }
         return toChomp;
     }
 }
