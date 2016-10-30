@@ -26,6 +26,7 @@ public class ThisIsUI : DialogueUIBehaviour
     // Display a line.
     public override IEnumerator RunLine(Yarn.Line line)
     {
+        string goalText;
         if (line.text.Contains(":"))
         {
             string title = line.text.Substring(0, line.text.IndexOf(':'));
@@ -40,16 +41,28 @@ public class ThisIsUI : DialogueUIBehaviour
                 ShowPortrait(character: title);
                 portrait.HighlightCharacter(title.Split('.')[0]);
             }
-            output.text = chompLeadingSpace(text);
+            goalText = text;
         }
         else
         {
-            output.text = chompLeadingSpace(line.text);
+            goalText = line.text;
         }
+        goalText = chompLeadingSpace(goalText);
         //break by :
         //build command and send to RunCommand to change emotions if necessary. Then Apply Shading?
         //Debug.Log(line.text);
 
+        for(int i = 0; i < goalText.Length; i++)
+        {
+            
+            output.text = goalText.Substring(0, i);
+            Debug.Log("Lettering");
+            //Todo: play voice letter clip.
+            yield return null;//todo: sloooow down (waitforseconds or catch up to a timestamp)
+
+            if (CheckContinue()) { i = goalText.Length; }//happens after one frame so it doesn't grab input from last frame.
+        }
+        output.text = goalText;
         yield return null;
         //yield break;
 
