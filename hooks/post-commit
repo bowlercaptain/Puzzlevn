@@ -1,7 +1,7 @@
 #!/bin/sh
 
-TEST_VAR = "hello"
+export TEST_VAR="hello"
 
-echo $TEST_VAR /whaterver
+echo $TEST_VAR
 
 .git/hooks/otherTestScript
