@@ -2,6 +2,7 @@
 
 #set -e
 echo "executing build"
+mkdir -p $workingFolder/$projectName
 "$unityLocation" -batchmode -quit -projectpath $projectFolder -buildWindowsPlayer $workingFolder/$projectName/$projectName.exe
 
 echo "running tests"
