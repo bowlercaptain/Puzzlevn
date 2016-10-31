@@ -4,6 +4,7 @@ using Yarn;
 using Yarn.Unity;
 using System;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class ThisIsUI : DialogueUIBehaviour
 {
@@ -16,6 +17,8 @@ public class ThisIsUI : DialogueUIBehaviour
     public GameObject textParent;
     public GameObject nameParent;//this is dumb, Unity should let me sort UI children behind their parents.
 
+    public TextRenderer textRenderer;
+
     public PortraitDisplay portrait;
 
     public Transform buttonsPanel;
@@ -27,10 +30,21 @@ public class ThisIsUI : DialogueUIBehaviour
     public override IEnumerator RunLine(Yarn.Line line)
     {
         string goalText;
+        List<string> tags =new List<string>();
+        if (line.text[0] == '#')
+        {
+            Debug.LogWarning("Comment found: " + line.text);
+            yield break;
+        }
         if (line.text.Contains(":"))
         {
             string title = line.text.Substring(0, line.text.IndexOf(':')).ToLowerInvariant();
             string text = line.text.Substring(line.text.IndexOf(':') + 1);
+            if (title.Length > 0 && title[title.Length - 1] == '*')
+            {
+                title = title.Substring(0, title.Length - 1);
+                tags.Add("italic");
+            }
             if (title.Split('.').Length > 1)
             {
                 ShowPortrait(title.Split('.')[1], title.Split('.')[0]);
@@ -47,23 +61,11 @@ public class ThisIsUI : DialogueUIBehaviour
         {
             goalText = line.text;
         }
-        goalText = chompLeadingSpace(goalText);
-        //break by :
-        //build command and send to RunCommand to change emotions if necessary. Then Apply Shading?
-        //Debug.Log(line.text);
+        
 
-        for (int i = 0; i < goalText.Length; i++)
-        {
-
-            output.text = goalText.Substring(0, i);
-            //Todo: play voice letter clip.
-            yield return null;//todo: sloooow down (waitforseconds or catch up to a timestamp)
-
-            if (CheckContinue()) { i = goalText.Length; }//happens after one frame so it doesn't grab input from last frame.
-        }
-        output.text = goalText;
+        yield return StartCoroutine(textRenderer.renderText(goalText, tags));
+        
         yield return null;
-        //yield break;
 
         while (!CheckContinue())
         {
@@ -71,7 +73,7 @@ public class ThisIsUI : DialogueUIBehaviour
         }
     }
 
-    private bool CheckContinue()
+    public static bool CheckContinue()
     {
         return Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0) || Input.GetButtonDown("Fire1") || Input.GetButtonDown("Jump") || Input.GetButtonDown("Submit");
     }
@@ -95,7 +97,7 @@ public class ThisIsUI : DialogueUIBehaviour
                 Instantiate(spacer).transform.SetParent(buttonsPanel);
             }
             GameObject buttonObject = Instantiate(choiceButton);
-            buttonObject.GetComponentInChildren<Text>().text = chompLeadingSpace(splitTitle[0]);
+            buttonObject.GetComponentInChildren<Text>().text = TextRenderer.ChompLeadingSpace(splitTitle[0]);
             var cb = buttonObject.GetComponent<ChoiceButton>();
             cb.ui = this;
             cb.index = i;
@@ -283,9 +285,4 @@ public class ThisIsUI : DialogueUIBehaviour
     }
 
 
-    static string chompLeadingSpace(string toChomp)
-    {
-        if (toChomp[0] == ' ') { return toChomp.Substring(1); }
-        return toChomp;
-    }
 }

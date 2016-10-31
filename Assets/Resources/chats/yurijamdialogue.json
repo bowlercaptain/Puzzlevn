@@ -82,10 +82,60 @@
 	{
 		"title": "Act2_Scene3_s",
 		"tags": "",
-		"body": "Aanya:Come here.\nRuth:*sniff* ...\nAanya:Is is all right if I touch your hair?\nRuth:*sniff* Mmhmm.\nAanya:...\nAanya*:Ruth...\nAanya:Do you feel a little bit better, now that all that's off your chest?\nRuth:A-a little bit *sniff*\nAanya:Listen. If you need someone to listen to you- about anything- i'm here. Okay? I can't really do much about your work, or about the people you have to help.\nAanya:But I can lend an ear and a shoulder, if you want. In fact, i'd prefer if you do.\nAanya:But I also know that you are incredibly strong. What you told me proves that, without a doubt.\nAanya:I don't think that strength and being helped are mutually exclusive. The opposite, in fact.\nAanya:I-I guess what i'm saying is don't feel like you are being pigeonholed into one structure of life or another. If you feel that one way of living isn't working, there isn't shame in changing that.\nAanya:I mean, consider the consequences and all but-\nRuth:*chuckle*\nAanya*:I'm... rambling aren't I.\nRuth:You're rambling.\nRuth:But that's okay.\nAanya:You look like you've made yourself comfortable there.\nRuth:Aanya?\nAanya:Hm?\nRuth:Do you want to... spend the night?\nAanya*:OMG",
+		"body": "Aanya:Come here.\nRuth:*sniff* ...\nAanya:Is is all right if I touch your hair?\nRuth:*sniff* Mmhmm.\nAanya:...\nAanya*:Ruth...\nAanya:Do you feel a little bit better, now that all that's off your chest?\nRuth:A-a little bit *sniff*\nAanya:Listen. If you need someone to listen to you- about anything- i'm here. Okay? I can't really do much about your work, or about the people you have to help.\nAanya:But I can lend an ear and a shoulder, if you want. In fact, i'd prefer if you do.\nAanya:But I also know that you are incredibly strong. What you told me proves that, without a doubt.\nAanya:I don't think that strength and being helped are mutually exclusive. The opposite, in fact.\nAanya:I-I guess what i'm saying is don't feel like you are being pigeonholed into one structure of life or another. If you feel that one way of living isn't working, there isn't shame in changing that.\nAanya:I mean, consider the consequences and all but-\nRuth:*chuckle*\nAanya*:I'm... rambling aren't I.\nRuth:You're rambling.\nRuth:But that's okay.\nAanya:You look like you've made yourself comfortable there.\nRuth:Aanya?\nAanya:Hm?\nRuth:Do you want to... spend the night?\nAanya*:H-huh?\n->I should get some stuff from my place but...\n    Aanya:I should run and get some things from my apartment, but yeah, i'd love to.\n->And maybe some groceries for dinner? But...\n    Aanya:I'd love to, though I should get some stuff from my place and... maybe some groceries?\n->Yes.\n->Absolutely.\n->Totes.\n    Aanya*:W-wait... nobody says \"totes\" anymore!\nAanya:But yeah. I'd like that.\n[[Act2_Scene4_s]]\n#End Scene 3",
 		"position": {
-			"x": 2219,
-			"y": 573
+			"x": 2135,
+			"y": 555
+		},
+		"colorID": 0
+	},
+	{
+		"title": "Act2_Scene4_s",
+		"tags": "",
+		"body": ":Later that evening...\nAanya*:How did they expect normal people to be able to make the recipes from their online cookbook?\nAanya*:Like, seriously? There were twenty ingredients for that alone!\nAanya*:Plus, we decided to make the Polar Impetus cookies too. Where the heck are were we going to get flash-frozen candy bars?\nAanya*:...\nAanya*:But...\nRuth:...zzzzz...\nAanya:...\nAanya*:I'm glad... you're here.\n#END SCENE 4\n[[Act3_Scene1_s]]",
+		"position": {
+			"x": 2414,
+			"y": 559
+		},
+		"colorID": 0
+	},
+	{
+		"title": "Act3_Scene1_s",
+		"tags": "",
+		"body": "#Act 3; Scene 1\n:One month later...\n:___ Arcade Hall, 3:30pm\nRuth: Hey Aanya, let's try this one!\nAanya*:Hmm... Scary House 7? Looks...\nAanya:Sure. After that...\nAanya*:I'd like to...\n->Take a photo in the photo booth...\n    Aanya:Did you want to take a photo? There's photo booths in the corner of the arcade.\n    Ruth:Ohh? Did you want to have a commemorative date photo?\n    Aanya:Er, yeah. I would like that, actually...\n    Ruth:Well! Let's waste no time then, we got a movie to head to after!\n    Aanya:W-what about Scary House 7?\n    Ruth:Hm? We should do something you wanted to, since you said something. Besides, i'd also like a photo.\n    Photo Booth:Say cheese!\n    Aanya*:That voice is kinda... creepy, actually.\n    Aanya:Cheese!\n    Ruth:Heh, you actually said it...\n    Aanya*:Darn you.\n->Or maybe take a shot at the crane game...\n    Aanya:How about the crane game? \n    Ruth:If you think you can win something out of it, then sure. Pretty sure they are rigged though.\n    Aanya:You take the side, and i'll take the front. Between the two of us we should be able to get...\n    Aanya:This!\n    Ruth:Is that... oh my god!\n    Aanya:Heh. I spotted it on the way in. A Masked Princess plushie!\n    Ruth:...\n    Aanya*:She's hyped, isn't she.\n    Ruth:...alright.\n    Ruth:We're gonna get it! Glory to the Redfields!\n    Aanya:Declare Victory!\n    Aanya:...\n    Ruth:!!!\n    Aanya:...!\n    Ruth:...\n    Aanya:This this was rigged after all.\n    Ruth:Boooooo! Dang flimsy claws! We shoulda had it!\n->The Parallax Eons live-action film is today, too. We should probably head over to that, if we want good seats.\nAanya:Should we head out to the movie then? We'll probably want to get there a little early for good seats.\nRuth:Sure thing. Plus there's a special event outside the theater. Anyone with a theater ticket gets access to some bonus quests!\nAanya:Seriously?\nAanya*:That's some serious marketing they got going.\nRuth:I'm soooo hyped, though. They've had this thing in the works for almost two years now! I wonder what bosses will show up in it...\nAanya:Shall we then?\nRuth:Yup!\n[[Act3_Scene2_s]]\n#End Scene 1",
+		"position": {
+			"x": 1542,
+			"y": 902
+		},
+		"colorID": 0
+	},
+	{
+		"title": "Act3_Scene2_s",
+		"tags": "",
+		"body": "#Act 3; Scene 2\n:Ruth's Apartment, 6:00pm\nRuth:Ahhh... that was a lot of fun!\nAanya:Good thing someone here suggested we coincide our date with the movie.\nRuth:Heh, wasn't it really good? I thought that the Aegis Bulwark character pretty much summed up that entire class perfectly.\nAanya:Pfft, right? They captured the essence of 'standing in the way of all the damage' pretty well.\nAanya:...though I was as disappointed in the acting as I thought I was going to be.\nRuth:Well, you can't win 'em all, right?\nRuth:By the way...\nAanya:Hm?\nRuth:I have some good news that'd i'd like you to hear.\nAanya:Oh? Did you get some rare drop from your last raid?\nRuth:No. Well, yes, I did, and it was really sweet. But that's not what I wanted to say.\nRuth:I got a new job offer. A consulting firm was looking to hire and... I put my name in. I got the call yesterday. They said they'd like to start the interview process.\nAanya:Oh, wow! That's... really big news, Ruth! Congratulations!\nRuth:I'm pretty happy with it, though it isn't definite yet. The other thing is...\nAanya*:Wait.\nRuth:It's out of state. About four hours or so away. If I got the job i'd have to move.\nAanya*:That's...\nAanya:But it would be a much better position, right? You'd get paid more, and you'd have chances for promotion. It sounds like it'd be a great opportunity!\nAanya*:Why am I saying this?\n#Ruth Worried\nRuth:Yeah... it really would be a much better workplace, that's for sure. I just... wanted to know how you felt about it.\nRuth:I mean, I am seriously thankful for everything you've done for me. And these last two months have been really really special to me.\nAanya:But that doesn't mean you should give up this chance, just for me.\nAanya*:Let me-\nAanya:You'll be taking on a lot, but it's like I said before: you're really, really strong, Ruth.\nAanya:I-\nAanya*:Please!\n->I want you to be happy, Ruth.\n    [[Act3_Scene3_a]]\n->Wait...\n    [[Act3_Scene3_b]]\n->I want to say something...\n    [[Act3_Scene3_b]]\n->Anything...\n    [[Act3_Scene3_b]]\n#END SCENE 2",
+		"position": {
+			"x": 1838,
+			"y": 1016
+		},
+		"colorID": 0
+	},
+	{
+		"title": "Act3_Scene3_a",
+		"tags": "",
+		"body": "Aanya:I want you to be happy, Ruth. I think you should go for it, y'know? These sorts of chances don't happen all the time, and I know how much stress your job causes you now.\nRuth:Are you sure Aanya? I mean, we won't stop talking with each other, but we won't be able to hang out as much as we do now.\nAanya:Ruth, i'll still be here to support you, right? We still can talk to each other, and we'll still be able to play together too.\nRuth:Y-you're right Aanya. Seriously, thank you. You're... just such a good person to me... I...\nRuth:I really do love you, Aanya.\nAanya:I love you too, Ruth.\n:Three months later...\nRuth:Yeah! I'm doing really well! The job's been working out so far, and all my coworkers are really nice! How're things over there?\nAanya:Good to hear. Things here have been going well. I moved to a different truck, so i'm serving burgers and stuff now.\nRuth:I'm glad you're doing well, I have to go! I'll probably be online later, if you wanted to party up! Catch you later!\nAanya:Alright. I'll talk to you later, Ruth.\n#Aanya*:Please... let me talk to her.",
+		"position": {
+			"x": 2170,
+			"y": 881
+		},
+		"colorID": 4
+	},
+	{
+		"title": "Act3_Scene3_b",
+		"tags": "",
+		"body": "Aanya:Ruth...please...*sniff*\nRuth:A-aanya? Are you alright? You-\nAanya:I-I'm not alright... I don't want...\nAanya:I don't... want you to...\nRuth:Come here.\nAanya:?!\nRuth:If you wanted to tell me that you don't want me to go, you should've said so in the first place, right?\nRuth:I said it wasn't set in stone, yeah? That means it's still something we can talk about. I don't need a decision right here, right now.\nAanya:You... *sniff* I was-\nRuth:There there... I'm sorry I worried you... We can talk about it later, right?\nAanya:*sniff*\nAanya:Yeah.",
+		"position": {
+			"x": 2173,
+			"y": 1169
 		},
 		"colorID": 0
 	}
