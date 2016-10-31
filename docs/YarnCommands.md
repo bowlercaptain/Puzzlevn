@@ -60,4 +60,4 @@ usage: \<\<MoveSlot Becky SlotName\>\>
 ####CheatyFace:
 ~~I thought I could be clever and take a variable number of arguments with a params list, but nope, Yarnie don't play that~~  
 ~~usage: you can't.~~  
-Guess who fixed yarn to take params list and multipple arguments? That's right it was me, DIO!
+Guess who fixed yarn to take params list and multiple arguments? That's right it was me, DIO!
