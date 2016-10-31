@@ -264,9 +264,11 @@ public class ThisIsUI : DialogueUIBehaviour
         if (format == null)
         {
             Debug.Log("Using default; could not find " + character);
-            format = defaultFormat;
+
+            format = new DialogueCharacter();
+            format.textColor = defaultFormat.textColor;
+            format.name = character;
         }
-        format.name = character;
         ShowFormat(format);
 
     }
