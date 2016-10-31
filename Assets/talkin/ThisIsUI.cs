@@ -268,6 +268,7 @@ public class ThisIsUI : DialogueUIBehaviour
             format = new DialogueCharacter();
             format.textColor = defaultFormat.textColor;
             format.name = character;
+
         }
         ShowFormat(format);
 
