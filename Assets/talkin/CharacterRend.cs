@@ -324,7 +324,7 @@ public class CharacterRend : MonoBehaviour
         HopM("1");
     }
 
-    [YarnCommand("HopMulti")]
+    [YarnCommand("Hop")]
     public void HopM(string times)
     {
 #if UNITY_EDITOR
