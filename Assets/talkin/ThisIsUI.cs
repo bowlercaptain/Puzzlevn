@@ -199,6 +199,9 @@ public class ThisIsUI : DialogueUIBehaviour
                     AudioManager.PlayUniqueLooping(splitCommand[1], splitCommand[2], 1);
                 }
                 break;
+            case "alias":
+                portrait.SetAlias(splitCommand[1], splitCommand[2]);
+                break;
             default:
                 Debug.LogError("Unknown command " + splitCommand[0]);
                 break;

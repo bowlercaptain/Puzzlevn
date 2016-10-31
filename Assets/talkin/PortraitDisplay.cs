@@ -34,6 +34,8 @@ public class PortraitDisplay : MonoBehaviour
     string[] slotChars;//name cache left in place so we don't have to do a million null checks. slot-changing animations should make sure this doesn't desync
     public Vector3[] slotLocations;
 
+    private Dictionary<string, string> aliases = new Dictionary<string, string>();
+
     public void Awake()
     {
         rends = new CharacterRend[slotList.Count];
@@ -104,8 +106,10 @@ public class PortraitDisplay : MonoBehaviour
             if (slotChars[i] == character)
             {
                 SetEmotion(i, emotion);
+                return;
             }
         }
+        Debug.LogWarning("could not find " + character + " to emote with");
     }
 
     public void SetEmotion(int slot, string emotion)
@@ -113,9 +117,14 @@ public class PortraitDisplay : MonoBehaviour
         SetEmotion(slot, slotChars[slot], emotion);
     }
 
+    public void SetAlias(string alias, string actualName)
+    {
+        aliases[alias] = actualName;
+    }
 
     public void SetEmotion(int slot, string charname, string emotion)
     {
+        aliases.TryGetValue(charname, out charname);
         Texture toShow = Resources.Load<Texture>("characters/" + charname + "/" + emotion);
         if (toShow == null)//skip looking for character default to show that emotion is missing
         {
