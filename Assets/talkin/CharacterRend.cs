@@ -341,7 +341,7 @@ public class CharacterRend : MonoBehaviour
     public class Hop : Animation
     {
         const float HOPDURATION = .25f;
-        const float HOPHEIGHT = 10f;
+        const float HOPHEIGHT = 5f;
         int times;
         public Hop(CharacterRend me, int times) : base(me) { this.times = times; }
 
