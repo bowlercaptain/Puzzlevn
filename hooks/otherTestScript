@@ -1,0 +1,5 @@
+#!/bin/sh
+
+echo $TEST_VAR yayy
+
+sleep 10
