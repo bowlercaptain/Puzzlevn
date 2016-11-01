@@ -190,7 +190,7 @@ public class CharacterRend : MonoBehaviour
     public void FadeDownA()
     {
         Add("Size", new FadeScale(this, this.targetSlot.scale));
-        Add("Color", new FadeColor(this, new Color(.8f,.8f,.8f,this.color.a)));
+        //Add("Color", new FadeColor(this, new Color(.8f,.8f,.8f,this.color.a)));
     }
 
 
