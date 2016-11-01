@@ -166,8 +166,8 @@ public class ThisIsUI : DialogueUIBehaviour
         {
             case "place":
                 {
-                    portrait.SetCharacter(splitCommand[1].ToLowerInvariant(), splitCommand[2].ToLowerInvariant(), (splitCommand.Length >= 4 ? splitCommand[3].ToLowerInvariant() : "show"));//figure this out later;
-                    portrait.SetEmotion(splitCommand[2].ToLowerInvariant(), "default");
+                    portrait.SetCharacter(splitCommand[2].ToLowerInvariant(), splitCommand[1].ToLowerInvariant(), (splitCommand.Length >= 4 ? splitCommand[3].ToLowerInvariant() : "show"));
+                    portrait.SetEmotion(splitCommand[1].ToLowerInvariant(), "default");
                 }
                 break;
             case "emote":
