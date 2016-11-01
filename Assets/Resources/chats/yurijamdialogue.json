@@ -122,7 +122,7 @@
 	{
 		"title": "Act3_Scene3_a",
 		"tags": "",
-		"body": "Aanya.happy:I want you to be happy, Ruth. I think you should go for it, y'know? These sorts of chances don't happen all the time, and I know how much stress your job causes you now.\nRuth.worried:Are you sure Aanya? I mean, we won't stop talking with each other, but we won't be able to hang out as much as we do now.\nAanya:Ruth, i'll still be here to support you, right? We still can talk to each other, and we'll still be able to play together too.\nRuth.default:Y-you're right Aanya. Seriously, thank you. You're... just such a good person to me... I...\nRuth.happy:I really do love you, Aanya.\nAanya.default:I love you too, Ruth.\n<<hide ruth>>\nAanya:...\nAanya:...\n:Three months later...\n<<emote aanya default>>\nRuth:Yeah! I'm doing really well! The job's been working out so far, and all my coworkers are really nice! How're things over there?\nAanya:Good to hear. Things here have been going well. I moved to a different truck, so i'm serving burgers and stuff now.\nRuth:I'm glad you're doing well, I have to go! I'll probably be online later, if you wanted to party up! Catch you later!\nAanya:Alright! I'll...\nAanya.sad:...\nAanya.happy:Chat with you online then..\n#Aanya*:Please... let me talk to her.\n<<hide aanya>>\n<<hide ruth>>\n[[credits]]",
+		"body": "Aanya.happy:I want you to be happy, Ruth. I think you should go for it, y'know? These sorts of chances don't happen all the time, and I know how much stress your job causes you now.\nRuth.worried:Are you sure Aanya? I mean, we won't stop talking with each other, but we won't be able to hang out as much as we do now.\nAanya:Ruth, i'll still be here to support you, right? We still can talk to each other, and we'll still be able to play together too.\nRuth.default:Y-you're right Aanya. Seriously, thank you. You're... just such a good person to me... I...\nRuth.happy:I really do love you, Aanya.\nAanya.default:I love you too, Ruth.\n<<hide ruth>>\nAanya:...\nAanya:...\n:Three months later...\n<<emote aanya default>>\nRuth:Yeah! I'm doing really well! The job's been working out so far, and all my coworkers are really nice! How're things over there?\nAanya:Good to hear. Things here have been going well. I moved to a different truck, so i'm serving burgers and stuff now.\nRuth:I'm glad you're doing well, I have to go! I'll probably be online later, if you wanted to party up! Catch you later!\nAanya:Alright! I'll...\nAanya.sad:...\nAanya.happy:Chat with you online then..\n#Aanya*:Please... let me talk to her.\n[[credits]]",
 		"position": {
 			"x": 2170,
 			"y": 881
@@ -132,7 +132,7 @@
 	{
 		"title": "Act3_Scene3_b",
 		"tags": "",
-		"body": "<<emote ruth worried>>\nAanya.sad:Ruth...please...*sniff*\nRuth:A-aanya? Are you alright? You-\nAanya.moresad:I-I'm not alright... I don't want...\nAanya.upset:I don't... want you to...\nRuth.default:Come here.\nAanya.sad:?!\nRuth:If you wanted to tell me that you don't want me to go, you should've said so in the first place, right?\nRuth:I said it wasn't set in stone, yeah? That means it's still something we can talk about. I don't need a decision right here, right now.\nAanya:You... *sniff* I was-\nRuth.happy:There there... I'm sorry I worried you... We can talk about it later, right?\nAanya:*sniff*\nAanya:Yeah.\n<<hide aanya>>\n<<hide ruth>>\n[[credits]]",
+		"body": "<<emote ruth worried>>\nAanya.sad:Ruth...please...*sniff*\nRuth:A-aanya? Are you alright? You-\nAanya.moresad:I-I'm not alright... I don't want...\nAanya.upset:I don't... want you to...\nRuth.default:Come here.\nAanya.sad:?!\nRuth:If you wanted to tell me that you don't want me to go, you should've said so in the first place, right?\nRuth:I said it wasn't set in stone, yeah? That means it's still something we can talk about. I don't need a decision right here, right now.\nAanya:You... *sniff* I was-\nRuth.happy:There there... I'm sorry I worried you... We can talk about it later, right?\nAanya:*sniff*\nAanya:Yeah.\n[[credits]]",
 		"position": {
 			"x": 2173,
 			"y": 1169
@@ -142,7 +142,7 @@
 	{
 		"title": "credits",
 		"tags": "",
-		"body": "<<place aanya left hide>>\n<<place ruth right hide>>\n<<enter aanya left>>\n<<emote aanya happy>>\n<<enter ruth right>>\n<<emote ruth happy>>\n:Thanks for playing our jam game!\n:Made for Yuri Jam 2016\n:Art- anpan\n:Codes- bowlercaptain\n:Words- mattcha\n:Sound- Freesound.org (thanks knufds, under CreativeCommons!)",
+		"body": "<<place aanya left hide>>\n<<enter aanya left>>\n<<emote aanya happy>>\n<<place ruth right hide>>\n<<enter ruth right>>\n<<emote ruth happy>>\n:Thanks for playing our jam game!\n:Made for Yuri Jam 2016\n:Art- anpan\n:Codes- bowlercaptain\n:Words- mattcha\n:Sound- Freesound.org (thanks knufds, under CreativeCommons!)",
 		"position": {
 			"x": 2488,
 			"y": 1000
@@ -152,7 +152,7 @@
 	{
 		"title": "Start",
 		"tags": "",
-		"body": ":Content Warning- stress/work-related depression\n:There is some (one) spontaneous sound, so check your volume!\n:Please enjoy our yuri game!\n[[Act1_Scene1_s]]",
+		"body": ":Hey there, thanks for downloading this yuri jam game! Please take note of the following:\n:Content Warning- stress/work-related depression\n:There is some (one) spontaneous sound, so check your volume!\n:Enjoy!\n[[Act1_Scene1_s]]",
 		"position": {
 			"x": 13,
 			"y": 170
