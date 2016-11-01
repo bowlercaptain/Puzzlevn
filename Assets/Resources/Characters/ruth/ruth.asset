@@ -11,4 +11,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcae0372f0d39f048b2581457d76efd1, type: 3}
   m_Name: ruth
   m_EditorClassIdentifier: 
-  textColor: {r: 0.8092136, g: 0.272, b: 1, a: 1}
+  textColor: {r: 1, g: 1, b: 1, a: 1}

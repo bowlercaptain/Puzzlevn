@@ -11,4 +11,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcae0372f0d39f048b2581457d76efd1, type: 3}
   m_Name: aanya
   m_EditorClassIdentifier: 
-  textColor: {r: 0.9843137, g: 0.25490198, b: 0.30588236, a: 1}
+  textColor: {r: 1, g: 1, b: 1, a: 1}
