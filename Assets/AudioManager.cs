@@ -38,18 +38,31 @@ public class AudioManager : MonoBehaviour {
 	private static List<AudioSource> availableSources = new List<AudioSource>();
 
 	public static void PlaySound(string soundName, float volume) {
+        
 		AudioSource source;
 		int x = 0;
-		do {
-			if (x >= availableSources.Count) {
-				source = instance.gameObject.AddComponent<AudioSource>();
-			} else {
-				source = availableSources[x];
-			}
-			x++;
-		} while (!source.isPlaying);
+        
+        /*do//TODO: figure out why this is broken and fix it. This will work but it's NOT GOOD CODE (also it leaks objects CONSTANtLY)
+        {
+            if (x >= availableSources.Count)
+            {
+                source = instance.gameObject.AddComponent<AudioSource>();
+                source.Stop();
+                availableSources.Add(source);
+            }
+            else
+            {
+                source = availableSources[x];
+            }
+            x++;
+            Debug.Log("lol " + x.ToString());
+        } while (!source.isPlaying||x>10);*/
+        
+        source = instance.gameObject.AddComponent<AudioSource>();
+        //DEBUG
 		source.loop = false;
 		source.clip = Resources.Load<AudioClip>("Sounds/" + soundName);
+        if(source.clip== null) { throw new UnityException("Could not find sound "+soundName); }
 		source.volume = volume;
 		source.Play();
 	}

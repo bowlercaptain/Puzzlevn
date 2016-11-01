@@ -20,7 +20,7 @@ public class CharacterRend : MonoBehaviour
         set { rend.material.color = value; }
     }
 
-	public PortraitDisplay.Slot targetSlot;
+    public PortraitDisplay.Slot targetSlot;
 
     MeshRenderer rend;
     void Awake()
@@ -124,7 +124,7 @@ public class CharacterRend : MonoBehaviour
 
         public override IEnumerator animate()
         {
-            for (int i = 0; i < 360; i+=4)
+            for (int i = 0; i < 360; i += 4)
             {
                 me.transform.rotation = Quaternion.Euler(0, 0, i);
                 yield return null;
@@ -137,31 +137,36 @@ public class CharacterRend : MonoBehaviour
         }
     }
 
-	    [YarnCommand("Enter")]
+    [YarnCommand("Enter")]
     public void EnterA(string dir)
     {
-        Add("Entry", new Enter(this,dir));
+        Add("Entry", new Enter(this, dir));
     }
 
     public class Enter : Animation
     {
-		string dir;
+        const float OFFSETMAGNITUDE = 10f;
+
+        string dir;
         public Enter(CharacterRend me, string dir) : base(me) { this.dir = dir; }
 
         public override IEnumerator animate()
         {
-			Dictionary<string, Vector3> offsetdirs = new Dictionary<string, Vector3>() {
-			{"up",Vector3.up },
-			{"down",Vector3.down },
-			{"left",Vector3.left },
-			{"right",Vector3.right }
-			};
-			Vector3 offSetDir = offsetdirs[dir] * 10f;
+            Dictionary<string, Vector3> offsetdirs = new Dictionary<string, Vector3>() {
+            {"up",Vector3.up },
+            {"down",Vector3.down },
+            {"left",Vector3.left },
+            {"right",Vector3.right }
+            };
 
-			
-            for (float i = (float)Math.PI/2f; i >=0; i-=1/60f)
+            Vector3 offSetDir;
+            Debug.Assert(offsetdirs.TryGetValue(dir, out offSetDir),"Enter direction not valid: "+dir);
+            offsetdirs.TryGetValue(dir, out offSetDir);
+
+
+            for (float i = (float)Math.PI / 2f; i >= 0; i -= 1 / 60f)
             {
-				me.transform.position = me.targetSlot.position + offSetDir * (1-Mathf.Cos(i)); 
+                me.transform.position = me.targetSlot.position + offSetDir * OFFSETMAGNITUDE * (1 - Mathf.Cos(i));
                 yield return null;
             }
         }
@@ -172,59 +177,113 @@ public class CharacterRend : MonoBehaviour
         }
     }
 
-
+    const float highlightScaleFactor = 1.3f;
+    const float highlightFadeTime = .366f;
     [YarnCommand("FadeUp")]
     public void FadeUpA()
     {
-        Add("Color", new FadeUp(this));
-    }
-
-    public class FadeUp : Animation
-    {
-        public FadeUp(CharacterRend me) : base(me) { }
-
-        public override IEnumerator animate()
-        {
-            Color startColor = me.color;
-            for (int i = 0; i < 100; i++)
-            {
-                Debug.Log("Fading in");
-                me.color = Color.Lerp(startColor, Color.white, i / 100f);
-                yield return null;
-            }
-        }
-
-        public override void Finish()
-        {
-            me.color = Color.white;
-        }
+        Add("Color", new FadeScale(this, this.targetSlot.scale * highlightScaleFactor));
+        Add("Size", new FadeColor(this, Color.white));
     }
 
     [YarnCommand("FadeDown")]
     public void FadeDownA()
     {
-        Add("Color", new FadeDown(this));
+        Add("Color", new FadeScale(this, this.targetSlot.scale));
+        Add("Size", new FadeColor(this, Color.grey));
     }
 
-    public class FadeDown : Animation
+    public class FadeColor : Animation
     {
-        public FadeDown(CharacterRend me) : base(me) { }
-
+        public FadeColor(CharacterRend me, Color targetColor) : base(me) { this.targetColor = targetColor; }
+        Color targetColor;
         public override IEnumerator animate()
         {
             Color startColor = me.color;
-            for (int i = 0; i < 100; i++)
+            for (float i = 0; i < 1f; i += Time.deltaTime / highlightFadeTime)
             {
-
-                Debug.Log("Fading out");
-                me.color = Color.Lerp(startColor, Color.grey, i / 100f);
+                Debug.Log("Fading in");
+                me.color = Color.Lerp(startColor, targetColor, i);
                 yield return null;
             }
         }
 
         public override void Finish()
         {
-            me.color = Color.grey;
+            me.color = targetColor;
+        }
+    }
+
+
+
+    public class FadeScale : Animation
+    {
+        public FadeScale(CharacterRend me, Vector3 targetScale) : base(me) { this.targetScale = targetScale; }
+        Vector3 targetScale;
+        public override IEnumerator animate()
+        {
+            Vector3 startScale = me.transform.localScale;
+            for (float i = 0; i < 1f; i += Time.deltaTime / highlightFadeTime)
+            {
+                me.transform.localScale = Vector3.Lerp(startScale, targetScale, i);
+                yield return null;
+            }
+        }
+
+        public override void Finish()
+        {
+            me.transform.localScale = targetScale;
+        }
+    }
+
+
+
+    [YarnCommand("Hide")]
+    public void HideA()
+    {
+        Add("Color", new Hide(this));
+    }
+
+    public class Hide : Animation
+    {
+        const float HIDETIME = 1f;
+        public Hide(CharacterRend me) : base(me) { }
+
+        public override IEnumerator animate()
+        {
+            Color startColor = me.color;
+            for (float time = 0f; time < HIDETIME; time += Time.deltaTime)
+            {
+                Debug.Log("Fading out");
+                me.color = Color.Lerp(startColor, Color.clear, time / HIDETIME);
+                yield return null;
+            }
+        }
+
+        public override void Finish()
+        {
+            me.color = Color.clear;
+        }
+    }
+
+    [YarnCommand("HideNow")]
+    public void HideNowA()
+    {
+        Add("Color", new HideNow(this));
+    }
+
+    public class HideNow : Animation
+    {
+        public HideNow(CharacterRend me) : base(me) { }
+
+        public override IEnumerator animate()
+        {
+            yield break;
+        }
+
+        public override void Finish()
+        {
+            me.color = Color.clear;
         }
     }
 
@@ -237,7 +296,8 @@ public class CharacterRend : MonoBehaviour
 
     public class MoveSlot : Animation
     {
-        public MoveSlot(CharacterRend me, string slotName) : base(me) {
+        public MoveSlot(CharacterRend me, string slotName) : base(me)
+        {
             destSlot = slotName;
         }
 
@@ -256,30 +316,59 @@ public class CharacterRend : MonoBehaviour
         }
     }
 
-	
 
-	[YarnCommand("Hop")]
-	public void HopA() {
-		Add("Hop", new Hop(this));
-	}
 
-	public class Hop : Animation {
-		const float HOPDURATION = .25f;
-		const float HOPHEIGHT = 30f;
-		public Hop(CharacterRend me) : base(me) { }
+    [YarnCommand("Hop")]
+    public void HopA()
+    {
+        HopM("1");
+    }
 
-		public override IEnumerator animate() {
-			for (float i = 0; i <=1 ; i += Time.deltaTime / HOPDURATION) {
-				me.transform.position = me.targetSlot.position + HOPHEIGHT * Vector3.up * ( i - i*i);
-				yield return null;
-			}
-		}
+    [YarnCommand("Hop")]
+    public void HopM(string times)
+    {
+#if UNITY_EDITOR
+        int outt;
+        Debug.Assert(int.TryParse(times, out outt));
+#endif
+        Add("Hop", new Hop(this, int.Parse(times)));
+    }
 
-		public override void Finish() {
-			me.transform.position = me.targetSlot.position;
-		}
-	}
 
+    public class Hop : Animation
+    {
+        const float HOPDURATION = .25f;
+        const float HOPHEIGHT = 30f;
+        int times;
+        public Hop(CharacterRend me, int times) : base(me) { this.times = times; }
+
+        public override IEnumerator animate()
+        {
+            for (int x = 0; x < times; x++)
+            {
+                for (float i = 0; i <= 1; i += Time.deltaTime / HOPDURATION)
+                {
+                    me.transform.position = me.targetSlot.position + HOPHEIGHT * Vector3.up * (i - i * i);
+                    yield return null;
+                }
+            }
+        }
+
+        public override void Finish()
+        {
+            me.transform.position = me.targetSlot.position;
+        }
+    }
+
+
+    [YarnCommand("CheatyFace")]
+    public void CheatA(params string[] lolll)
+    {
+        foreach (string lol in lolll)//this doesn't work boooooo
+        {
+            Debug.Log(lol);
+        }
+    }
 }
 
 

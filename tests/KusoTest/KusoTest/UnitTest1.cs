@@ -23,6 +23,13 @@ namespace KusoTest {
             Assert.IsTrue((float)(vall) != 0f);
 
 			Assert.AreNotEqual<float>(0f, (float)(typeof(CharacterRend.Hop).GetField("HOPHEIGHT",BindingFlags.NonPublic | BindingFlags.Static).GetValue(null)));
-		}
-	}
+
+			Assert.AreNotEqual<float>(0f, (float)(typeof(CharacterRend.Hide).GetField("HIDETIME",BindingFlags.NonPublic | BindingFlags.Static).GetValue(null)));
+
+            if(((float)(typeof(CharacterRend.Enter).GetField("OFFSETMAGNITUDE", BindingFlags.NonPublic | BindingFlags.Static).GetValue(null)))< 1f){
+                Console.WriteLine("Warning: 'Enter' magnitude is definitely too small to look good. Are you sure it's correct?");
+            }
+
+        }
+    }
 }

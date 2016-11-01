@@ -1,5 +1,7 @@
 #!/bin/sh
 
+. hooks/config
+
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
 echo running post-merge
@@ -7,13 +9,14 @@ echo running post-merge
 case $CURRENT_BRANCH in
 mastabranch)
   echo merged back into develop
-  .git/hooks/post-flow-feature-finish
+  hooks/windows-build -beta
   ;;
 feature/*)
   echo merged into a feature lol
   ;;
 primetime)
   echo merged into release o shat
+    hooks/windows-build
   ;;
 *)
   echo something else man
