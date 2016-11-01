@@ -187,7 +187,12 @@ public class ThisIsUI : DialogueUIBehaviour
                     nameParent.SetActive(true);
                 }
                 break;
-
+            case "waitforclick":
+                while (!CheckContinue())
+                {
+                    yield return null;
+                }
+                break;
             case "playsound":
                 {
                     AudioManager.PlaySound(splitCommand[1], 1);

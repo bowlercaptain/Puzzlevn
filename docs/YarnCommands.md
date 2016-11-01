@@ -27,6 +27,10 @@ usage: `<<Enter Becky Right>>`            <sup><sub>YooooooOooOOOOOOOO~!!!!</sup
 hides the dialogue and nametag boxes as if it were a line of dialogue. Useful in conjunction with place background for showing full-screen images.  
 usage: `<<HideText>>`
 
+####Wait for line:
+Does nothing but acts like a line of dialogue, like Hidetext but the dialogue stays on the screen.
+usage: `<<WaitForclick>>`
+
 ####PlaySound:
 Plays a sound effect from Resources/Sounds. Ignores file extensions and only uses name.  
 usage: `<<PlaySound Boing>>`  
@@ -51,6 +55,7 @@ usage: `<<emote Becky smug>>`
 ####Alias:
 Makes a character referred to by a certain name load emotions from a different resources folder.
 usage: `<<alias Ruth RuthHairDown>>`
+
 
 ----
 ####FlipOut:
