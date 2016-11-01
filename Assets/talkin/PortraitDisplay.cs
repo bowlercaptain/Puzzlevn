@@ -24,10 +24,10 @@ public class PortraitDisplay : MonoBehaviour
     }
 
     private Dictionary<string, Slot> slotList = new Dictionary<string, Slot>()  {
-    { "left", new Slot(0,new Vector3(-4.14f,2.6f,0),new Vector3(8f,16f,1f))},
-    { "right", new Slot(1,new Vector3(3.54f,2.6f,0),new Vector3(8f,16f,1f))},
+    { "left", new Slot(0,new Vector3(-4.14f,3f,0),new Vector3(7.05f,14.1f,1f))},
+    { "right", new Slot(1,new Vector3(3.54f,3f,0),new Vector3(7.05f,14.1f,1f))},
     { "center", new Slot(2,new Vector3(0f,2.6f,0),new Vector3(8f,16f,1f))},
-    { "background", new Slot(3,new Vector3(0,0,1),new Vector3(20f,20f,1f))}
+    { "background", new Slot(3,new Vector3(0,0,1),new Vector3(19.2f*1.2f,10.8f*1.2f,1f))}
     };
 
     public CharacterRend[] rends;

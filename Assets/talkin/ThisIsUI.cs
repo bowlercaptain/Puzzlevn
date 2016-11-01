@@ -33,7 +33,7 @@ public class ThisIsUI : DialogueUIBehaviour
         List<string> tags =new List<string>();
         if (line.text[0] == '#')
         {
-            Debug.LogWarning("Comment found: " + line.text);
+            Debug.Log("Comment found: " + line.text);
             yield break;
         }
         if (line.text.Contains(":"))
@@ -273,7 +273,7 @@ public class ThisIsUI : DialogueUIBehaviour
         {
             Debug.Log("Using default; could not find " + character);
 
-            format = new DialogueCharacter();
+            format = ScriptableObject.CreateInstance<DialogueCharacter>();
             format.textColor = defaultFormat.textColor;
             format.name = character;
         }
