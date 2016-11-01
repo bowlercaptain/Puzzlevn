@@ -273,7 +273,7 @@ public class ThisIsUI : DialogueUIBehaviour
         {
             Debug.Log("Using default; could not find " + character);
 
-            format = new DialogueCharacter();
+            format = ScriptableObject.CreateInstance<DialogueCharacter>();
             format.textColor = defaultFormat.textColor;
             format.name = character;
         }

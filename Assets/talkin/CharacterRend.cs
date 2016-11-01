@@ -177,20 +177,28 @@ public class CharacterRend : MonoBehaviour
         }
     }
 
-    const float highlightScaleFactor = 1.3f;
+    const float highlightScaleFactor = 1.1f;
     const float highlightFadeTime = .366f;
     [YarnCommand("FadeUp")]
     public void FadeUpA()
     {
-        Add("Color", new FadeScale(this, this.targetSlot.scale * highlightScaleFactor));
-        Add("Size", new FadeColor(this, Color.white));
+        Add("Size", new FadeScale(this, this.targetSlot.scale * highlightScaleFactor));
+        Add("Color", new FadeColor(this, Color.white));
     }
 
     [YarnCommand("FadeDown")]
     public void FadeDownA()
     {
-        Add("Color", new FadeScale(this, this.targetSlot.scale));
-        Add("Size", new FadeColor(this, Color.grey));
+        Add("Size", new FadeScale(this, this.targetSlot.scale));
+        Add("Color", new FadeColor(this, new Color(.8f,.8f,.8f,this.color.a)));
+    }
+
+
+    [YarnCommand("hide")]
+    public void HideA()
+    {
+        Debug.Log("Trying to hide lol");
+        Add("Color", new FadeColor(this, new Color(1,1,1,0)));
     }
 
     public class FadeColor : Animation
@@ -238,11 +246,6 @@ public class CharacterRend : MonoBehaviour
 
 
 
-    [YarnCommand("Hide")]
-    public void HideA()
-    {
-        Add("Color", new Hide(this));
-    }
 
     public class Hide : Animation
     {
@@ -255,7 +258,7 @@ public class CharacterRend : MonoBehaviour
             for (float time = 0f; time < HIDETIME; time += Time.deltaTime)
             {
                 Debug.Log("Fading out");
-                me.color = Color.Lerp(startColor, Color.clear, time / HIDETIME);
+                me.color = Color.Lerp(startColor, new Color(1,1,1,0), time / HIDETIME);
                 yield return null;
             }
         }
@@ -338,7 +341,7 @@ public class CharacterRend : MonoBehaviour
     public class Hop : Animation
     {
         const float HOPDURATION = .25f;
-        const float HOPHEIGHT = 30f;
+        const float HOPHEIGHT = 10f;
         int times;
         public Hop(CharacterRend me, int times) : base(me) { this.times = times; }
 
