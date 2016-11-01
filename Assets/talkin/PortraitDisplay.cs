@@ -131,7 +131,7 @@ public class PortraitDisplay : MonoBehaviour
         Texture toShow = Resources.Load<Texture>("characters/" + charname + "/" + emotion);
         if (toShow == null)//skip looking for character default to show that emotion is missing
         {
-            Debug.Log("Couldn't find emotion " + emotion + " for character " + charname);
+            Debug.LogWarning("Couldn't find emotion " + emotion + " for character " + charname);
             toShow = Resources.Load<Texture>("characters/fallback");
         }
         rends[slot].texture = toShow;
