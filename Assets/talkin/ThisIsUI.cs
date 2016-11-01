@@ -4,6 +4,7 @@ using Yarn;
 using Yarn.Unity;
 using System;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class ThisIsUI : DialogueUIBehaviour
 {
@@ -13,8 +14,10 @@ public class ThisIsUI : DialogueUIBehaviour
     public Text output;
     public Text charName;
 
-	public GameObject textParent;
-	public GameObject nameParent;//this is dumb, Unity should let me sort UI children behind their parents.
+    public GameObject textParent;
+    public GameObject nameParent;//this is dumb, Unity should let me sort UI children behind their parents.
+
+    public TextRenderer textRenderer;
 
     public PortraitDisplay portrait;
 
@@ -26,10 +29,22 @@ public class ThisIsUI : DialogueUIBehaviour
     // Display a line.
     public override IEnumerator RunLine(Yarn.Line line)
     {
+        string goalText;
+        List<string> tags =new List<string>();
+        if (line.text[0] == '#')
+        {
+            Debug.Log("Comment found: " + line.text);
+            yield break;
+        }
         if (line.text.Contains(":"))
         {
-            string title = line.text.Substring(0, line.text.IndexOf(':'));
+            string title = line.text.Substring(0, line.text.IndexOf(':')).ToLowerInvariant();
             string text = line.text.Substring(line.text.IndexOf(':') + 1);
+            if (title.Length > 0 && title[title.Length - 1] == '*')
+            {
+                title = title.Substring(0, title.Length - 1);
+                tags.Add("italic");
+            }
             if (title.Split('.').Length > 1)
             {
                 ShowPortrait(title.Split('.')[1], title.Split('.')[0]);
@@ -40,18 +55,17 @@ public class ThisIsUI : DialogueUIBehaviour
                 ShowPortrait(character: title);
                 portrait.HighlightCharacter(title.Split('.')[0]);
             }
-            output.text = text;
+            goalText = text;
         }
         else
         {
-            output.text = line.text;
+            goalText = line.text;
         }
-        //break by :
-        //build command and send to RunCommand to change emotions if necessary. Then Apply Shading?
-        //Debug.Log(line.text);
+        
 
+        yield return StartCoroutine(textRenderer.renderText(goalText, tags));
+        
         yield return null;
-        //yield break;
 
         while (!CheckContinue())
         {
@@ -59,16 +73,17 @@ public class ThisIsUI : DialogueUIBehaviour
         }
     }
 
-	private bool CheckContinue() {
-		return Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0) || Input.GetButtonDown("Fire1") || Input.GetButtonDown("Jump") || Input.GetButtonDown("Submit");
-	}
+    public static bool CheckContinue()
+    {
+        return Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0) || Input.GetButtonDown("Fire1") || Input.GetButtonDown("Jump") || Input.GetButtonDown("Submit");
+    }
 
-	int[] doneBox;
-	// Display the options, and call the optionChooser when done.
-	public override IEnumerator RunOptions(Yarn.Options optionsCollection,
+    int[] doneBox;
+    // Display the options, and call the optionChooser when done.
+    public override IEnumerator RunOptions(Yarn.Options optionsCollection,
                                             Yarn.OptionChooser optionChooser)
     {
-
+        Coroutine timerRoutine = null;
         Debug.Log("Running Options");
         //output.text = "";
         int len = optionsCollection.options.Count;
@@ -76,17 +91,32 @@ public class ThisIsUI : DialogueUIBehaviour
         doneBox = new int[] { -1 };
         for (int i = 0; i < len; i++)
         {
+            string[] splitTitle = optionsCollection.options[i].Split('@');
             if (i != 0)
             {
                 Instantiate(spacer).transform.SetParent(buttonsPanel);
             }
             GameObject buttonObject = Instantiate(choiceButton);
-            buttonObject.GetComponentInChildren<Text>().text = optionsCollection.options[i];
-			var cb = buttonObject.GetComponent<ChoiceButton>();
-			cb.ui = this;
-			cb.index = i;
+            buttonObject.GetComponentInChildren<Text>().text = TextRenderer.ChompLeadingSpace(splitTitle[0]);
+            var cb = buttonObject.GetComponent<ChoiceButton>();
+            cb.ui = this;
+            cb.index = i;
             buttonObject.transform.SetParent(buttonsPanel);
             //output.text += (i+1).ToString() + ": " + optionsCollection.options[i];
+            if (splitTitle.Length > 1)
+            {
+                switch (splitTitle[1])
+                {
+                    case "timer":
+                        Debug.Assert(splitTitle.Length >= 3);
+#if UNITY_EDITOR
+                        int outt;
+                        Debug.Assert(int.TryParse(splitTitle[2], out outt));
+#endif
+                        timerRoutine = StartCoroutine(TimeDelayChoice(i, int.Parse(splitTitle[2])));
+                        break;
+                }
+            }
         }
         Instantiate(halfSpacer).transform.SetParent(buttonsPanel);
 
@@ -96,67 +126,95 @@ public class ThisIsUI : DialogueUIBehaviour
             {
                 if (Input.GetKey((i + 1).ToString()))
                 {
-                    
+
                     doneBox[0] = i;
                 }
             }
 
-			
+
 
             yield return null;
         }
-		optionChooser(doneBox[0]);
-		foreach (Transform child in buttonsPanel)
+        optionChooser(doneBox[0]);
+        foreach (Transform child in buttonsPanel)
         {
             Destroy(child.gameObject);
         }
+        if (timerRoutine != null) { StopCoroutine(timerRoutine); }
         yield break;
     }
 
+    IEnumerator TimeDelayChoice(int index, int millis)
+    {
+        yield return new WaitForSeconds(millis / 1000f);
+        doneBox[0] = index;
+    }
 
-	public void AcceptChoice(int index) {//all of C# is stabbed. Straight stabbed.
-		doneBox[0] = index;
+    public void AcceptChoice(int index)
+    {//all of C# is stabbed. Straight stabbed.
+        doneBox[0] = index;
 
-	}
+    }
 
     // Perform some game-specific command.
     public override IEnumerator RunCommand(Yarn.Command command)
     {
         Debug.Log("Run command: " + command.text);
         string[] splitCommand = command.text.Split(' ');//command.text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-        if (splitCommand[0] == "place")
+
+        switch (splitCommand[0].ToLowerInvariant())
         {
-            portrait.SetCharacter(splitCommand[1], splitCommand[2], (splitCommand.Length>=4?splitCommand[3]:"show"));//figure this out later;
-            portrait.SetEmotion(splitCommand[2], "default");
+            case "place":
+                {
+                    portrait.SetCharacter(splitCommand[2].ToLowerInvariant(), splitCommand[1].ToLowerInvariant(), (splitCommand.Length >= 4 ? splitCommand[3].ToLowerInvariant() : "show"));
+                    portrait.SetEmotion(splitCommand[1].ToLowerInvariant(), "default");
+                }
+                break;
+            case "emote":
+                {
+                    portrait.SetEmotion(splitCommand[1].ToLowerInvariant(), splitCommand[2].ToLowerInvariant());
+                }
+                break;
+            case "hidetext":
+                {
+                    textParent.SetActive(false);
+                    nameParent.SetActive(false);
+                    while (!CheckContinue())
+                    {
+                        yield return null;
+                    }
+                    textParent.SetActive(true);
+                    nameParent.SetActive(true);
+                }
+                break;
+            case "waitforclick":
+                while (!CheckContinue())
+                {
+                    yield return null;
+                }
+                break;
+            case "playsound":
+                {
+                    AudioManager.PlaySound(splitCommand[1], 1);
+                }
+                break;
+
+            case "playuniquelooping":
+                {
+                    AudioManager.PlayUniqueLooping(splitCommand[1], splitCommand[2], 1);
+                }
+                break;
+            case "alias":
+                portrait.SetAlias(splitCommand[1], splitCommand[2]);
+                break;
+            default:
+                Debug.LogError("Unknown command " + splitCommand[0]);
+                break;
         }
-        if (splitCommand[0] == "emote")
-        {
-            portrait.SetEmotion(splitCommand[1], splitCommand[2]);
-        }
+        //"move <character> <slot>"
+        //move <slot> <slot>
 
-		if (splitCommand[0] == "hideText") {
-			textParent.SetActive(false);
-			nameParent.SetActive(false);
-			while (!CheckContinue()) {
-				yield return null;
-			}
-			textParent.SetActive(true);
-			nameParent.SetActive(true);
-		}
-		//fuck animation (for now)
-		//"move <character> <slot>"
-		//move <slot> <slot>
-		//animate <character> <animation>
-		//animate <slot> <animation>
-
-		//fuck shading:
-		//shade <character/slot>
-		//light <character/slot>
-
-		//figure out pixelchibi animations? need to make pixelchibiland first.
-
-
-		yield break;// return null;
+        yield break;
     }
 
     // The node has ended.
@@ -177,7 +235,7 @@ public class ThisIsUI : DialogueUIBehaviour
     // A conversation has started.
     public override IEnumerator DialogueStarted()
     {
-       
+
 
         yield break;
     }
@@ -214,9 +272,11 @@ public class ThisIsUI : DialogueUIBehaviour
         if (format == null)
         {
             Debug.Log("Using default; could not find " + character);
-            format = defaultFormat;
+
+            format = ScriptableObject.CreateInstance<DialogueCharacter>();
+            format.textColor = defaultFormat.textColor;
+            format.name = character;
         }
-        format.name = character;
         ShowFormat(format);
 
     }
@@ -233,5 +293,6 @@ public class ThisIsUI : DialogueUIBehaviour
             Debug.LogError("NO DEFAULT FORMAT PANIC ALSO HERE'S THE STACK TRACE");
         }
     }
+
 
 }

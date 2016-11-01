@@ -1,15 +1,19 @@
 #!/bin/bash
 
 #set -e
+while [ -e Temp/UnityLockFile ]
+do
+	echo I cannot build while the project is still open in Unity. I will wait 5 seconds and try again.
+	sleep 5
+done
+
 echo "executing build"
-mkdir -p $workingFolder/$projectName
 "$unityLocation" -batchmode -quit -projectpath $projectFolder -buildWindowsPlayer $workingFolder/$projectName/$projectName.exe
 
 echo "running tests"
 set -e
-echo skipping tests because they did not exist back now
-echo "$MSBuildLocation" tests/KusoTest/KusoTest.sln
-echo "$MSTestLocation" /testcontainer:tests/KusoTest/KusoTest/bin/Debug/KusoTest.dll
+"$MSBuildLocation" tests/KusoTest/KusoTest.sln
+"$MSTestLocation" /testcontainer:tests/KusoTest/KusoTest/bin/Debug/KusoTest.dll
 
 hooks/butler push $workingFolder/$projectName $itchURL:windows$1
 echo "pushed!"
