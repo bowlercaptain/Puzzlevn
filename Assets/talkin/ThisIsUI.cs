@@ -33,7 +33,7 @@ public class ThisIsUI : DialogueUIBehaviour
         List<string> tags =new List<string>();
         if (line.text[0] == '#')
         {
-            Debug.LogWarning("Comment found: " + line.text);
+            Debug.Log("Comment found: " + line.text);
             yield break;
         }
         if (line.text.Contains(":"))
