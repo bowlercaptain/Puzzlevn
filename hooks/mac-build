@@ -15,7 +15,7 @@ set -e
 "$MSTestLocation" /testcontainer:tests/KusoTest/KusoTest/bin/Debug/KusoTest.dll
 
 echo "executing build"
-"$unityLocation" -batchmode -quit -projectpath $projectFolder -buildWindowsPlayer $workingFolder/windows/$projectName/$projectName.exe
+"$unityLocation" -batchmode -quit -projectpath $projectFolder -buildOSXUniversalPlayer $workingFolder/mac/$projectName/$projectName.exe
 
-hooks/butler push $workingFolder/windows/$projectName $itchURL:windows$1
+hooks/butler push $workingFolder/mac/$projectName $itchURL:mac$1
 echo "pushed!"
