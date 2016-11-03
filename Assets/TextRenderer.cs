@@ -48,7 +48,7 @@ public class TextRenderer : MonoBehaviour
                 else if (text[i] == '<' && text.Length >= i + 3 && text[i+1]=='/' && text[i + 3] == '>')
                 {
                     outPutText += text.Substring(i, 4);
-                    Debug.Assert(modes.Remove(text.Substring(i, 4)));
+                    modes.Remove(text.Substring(i, 4));
                     i += 3;
                 }
                 else
