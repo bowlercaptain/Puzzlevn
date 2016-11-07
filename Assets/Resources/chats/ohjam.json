@@ -1,0 +1,82 @@
+[
+	{
+		"title": "Start",
+		"tags": "",
+		"body": "This is a rhythm game.\nIt's also a puzzle game.\nThis is a \"visual novel\".\nGood luck!\n[[shave]]",
+		"position": {
+			"x": 440,
+			"y": 359
+		},
+		"colorID": 0
+	},
+	{
+		"title": "shave",
+		"tags": "",
+		"body": "<<Playsound knock>>\n->*knock*\n    [[failshave]]\n->...@timer@1000\n<<Playsound knock>>\n->*knock*\n    [[failshave]]\n->...@timer@500\n<<Playsound knock>>\n->*knock*\n    [[failshave]]\n->...@timer@500\n<<Playsound knock>>\n->*knock*\n    [[failshave]]\n->...@timer@1000\n<<Playsound knock>>\n->*knock*\n    [[failshave]]\n->...@timer@1800\n<<playsound silence>>\n->*knock*\n->...@timer@400\n    [[failshave]]\n<<Playsound knock>>\n->*knock*\n    [[failshave]]\n->...@timer@800\n<<playsound silence>>\n->*knock*\n    <<playsound knock>>\n    [[winshave]]\n->...@timer@400\n    [[failshave]]",
+		"position": {
+			"x": 885,
+			"y": 267
+		},
+		"colorID": 0
+	},
+	{
+		"title": "failshave",
+		"tags": "",
+		"body": "Whoops, try again.\n[[K.@timer:2000|shave]]\n[[Restart|start]]",
+		"position": {
+			"x": 688,
+			"y": 552
+		},
+		"colorID": 0
+	},
+	{
+		"title": "winshave",
+		"tags": "",
+		"body": "Nice one!\nNext one's a little harder, and probably the last one because I have zero time to finish this.\n[[morse]]",
+		"position": {
+			"x": 986,
+			"y": 536
+		},
+		"colorID": 0
+	},
+	{
+		"title": "morse",
+		"tags": "",
+		"body": "<<playsound long>>\r\n->*short*\r\n    [[morsefail]]\r\n->*long*\r\n    [[morsefail]]\r\n->...@timer@1200\r\n<<playsound long>>\r\n->*short*\r\n    [[morsefail]]\r\n->*long*\r\n    [[morsefail]]\r\n->...@timer@1200\r\n<<playsound short>>\r\n->*short*\r\n    [[morsefail]]\r\n->*long*\r\n    [[morsefail]]\r\n->...@timer@600\r\n<<playsound silence>>\r\n->*short*\r\n    [[morsefail]]\r\n->*long*\r\n    [[morsefail]]\r\n->...@timer@1200\r\n<<playsound long>>\r\n->*short*\r\n    [[morsefail]]\r\n->*long*\r\n    [[morsefail]]\r\n->...@timer@1200\r\n<<playsound long>>\r\n->*short*\r\n    [[morsefail]]\r\n->*long*\r\n    [[morsefail]]\r\n->...@timer@1200\r\n<<playsound long>>\r\n->*short*\r\n    [[morsefail]]\r\n->*long*\r\n    [[morsefail]]\r\n->...@timer@1200\r\n<<playsound silence>>\r\n->*short*\r\n    [[morsefail]]\r\n->*long*\r\n    [[morsefail]]\r\n->...@timer@1200\r\n<<playsound long>>\r\n->*short*\r\n    [[morsefail]]\r\n->*long*\r\n    [[morsefail]]\r\n->...@timer@1200\r\n<<playsound silence>>\r\n->*short*\r\n    [[morsefail]]\r\n->*long*\r\n    [[morsefail]]\r\n->...@timer@1200\r\n<<playsound long>>\r\n->*short*\r\n    [[morsefail]]\r\n->*long*\r\n    [[morsefail]]\r\n->...@timer@1200\r\n<<playsound silence>>\r\n->*short*\r\n    [[morsefail]]\r\n->*long*\r\n    [[morsefail]]\r\n->...@timer@1200\r\n<<playsound short>>\r\n->*short*\r\n    [[morsefail]]\r\n->*long*\r\n    [[morsefail]]\r\n->...@timer@600\r\n<<playsound long>>\r\n->*short*\r\n    [[morsefail]]\r\n->*long*\r\n    [[morsefail]]\r\n->...@timer@1200\r\n<<playsound silence>>\r\n->*short*\r\n    [[morsefail]]\r\n->*long*\r\n    [[morsefail]]\r\n->...@timer@2100\r\n<<playsound long>>\r\n->*short*\r\n    [[morsefail]]\r\n->*long*\r\n    [[morsefail]]\r\n->...@timer@1200\r\n<<playsound long>>\r\n->*short*\r\n    [[morsefail]]\r\n->*long*\r\n    [[morsefail]]\r\n->...@timer@1200\r\n<<playsound short>>\r\n->*short*\r\n    [[morsefail]]\r\n->*long*\r\n    [[morsefail]]\r\n->...@timer@600\r\n<<playsound silence>>\r\n->*short*\r\n    [[morsefail]]\r\n->*long*\r\n    [[morsefail]]\r\n->...@timer@1200\r\n<<playsound long>>\r\n->*short*\r\n    [[morsefail]]\r\n->*long*\r\n    [[morsefail]]\r\n->...@timer@1200\r\n<<playsound long>>\r\n->*short*\r\n    [[morsefail]]\r\n->*long*\r\n    [[morsefail]]\r\n->...@timer@1200\r\n<<playsound long>>\r\n->*short*\r\n    [[morsefail]]\r\n->*long*\r\n    [[morsefail]]\r\n->...@timer@1200\r\n<<playsound silence>>\r\n->*short*\r\n    [[morsefail]]\r\n->*long*\r\n    [[morsefail]]\r\n->...@timer@700\r\n<<playsound silence>>\r\n->*short*\r\n->*long*\r\n    [[morsefail]]\r\n->...@timer@2500\r\n    [[morsefail]]\r\n<<playsound short>>\r\n->*short*\r\n->*long*\r\n    [[morsefail]]\r\n->...@timer@2000\r\n    [[morsefail]]\r\n<<playsound short>>\r\n->*short*\r\n    [[morsefail]]\r\n->*long*\r\n->...@timer@1500\r\n    [[morsefail]]\r\n<<playsound long>>\r\n->*short*\r\n->*long*\r\n    [[morsefail]]\r\n->...@timer@2000\r\n    [[morsefail]]\r\n<<playsound short>>\r\n->*short*\r\n->*long*\r\n    [[morsefail]]\r\n->...@timer@2000\r\n    [[morsefail]]\r\n<<playsound short>>\r\n->*short*\r\n    [[morsefail]]\r\n->*long*\r\n->...@timer@2000\r\n    [[morsefail]]\r\n<<playsound long>>\r\n->*short*\r\n->*long*\r\n    [[morsefail]]\r\n->...@timer@2000\r\n    [[morsefail]]\r\n<<playsound short>>\r\n->*short*\r\n->*long*\r\n    [[morsefail]]\r\n->...@timer@2000\r\n    [[morsefail]]\r\n<<playsound short>>\r\n->*short*\r\n->*long*\r\n    [[morsefail]]\r\n->...@timer@2000\r\n    [[morsefail]]\r\n<<playsound short>>\r\n->*short*\r\n    [[morsefail]]\r\n->*long*\r\n    <<playsound long>>\r\n    [[morsewin]]\r\n->...@timer@2000\r\n    [[morsefail]]",
+		"position": {
+			"x": 1450,
+			"y": 517
+		},
+		"colorID": 0
+	},
+	{
+		"title": "morsefail",
+		"tags": "",
+		"body": "Nope! Try again.\n->K\n    [[morse]]\n->Did you know you can use number keys to select options?\n    And space to advance the text!\n    ->cool, try that morse thing again.\n        [[morse]]\n->Restart game\n    [[Start]]",
+		"position": {
+			"x": 1242,
+			"y": -66
+		},
+		"colorID": 0
+	},
+	{
+		"title": "morsewin",
+		"tags": "",
+		"body": "Good job! You did it!\nGame over. You win! Thanks for playing.\nGame by bowlercaptain\nKnocking sound effect from \"door knocking troll sound\" on Youtube.\nHave a nice day.",
+		"position": {
+			"x": 1809,
+			"y": 667
+		},
+		"colorID": 0
+	},
+	{
+		"title": "start",
+		"tags": "",
+		"body": "[[Start]]",
+		"position": {
+			"x": -75,
+			"y": 355
+		},
+		"colorID": 0
+	}
+]
