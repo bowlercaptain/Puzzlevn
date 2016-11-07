@@ -124,7 +124,7 @@ public class ThisIsUI : DialogueUIBehaviour
         {
             for (int i = 0; i < len; i++)
             {
-                if (Input.GetKey((i + 1).ToString()))
+                if (Input.GetKeyDown((i + 1).ToString()))
                 {
 
                     doneBox[0] = i;
