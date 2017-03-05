@@ -9,6 +9,7 @@ mastabranch)
   echo merged back into develop
   hooks/windows-build -beta
   hooks/mac-build -beta
+  hooks/android-build -beta
   ;;
 feature/*)
   echo merged into a feature lol
@@ -17,6 +18,7 @@ primetime)
   echo merged into release o shat
     hooks/windows-build
     hooks/mac-build
+    hooks/android-build
   ;;
 *)
   echo something else man
