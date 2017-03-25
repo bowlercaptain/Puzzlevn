@@ -29,6 +29,11 @@ public class ThisIsUI : DialogueUIBehaviour
     // Display a line.
     public override IEnumerator RunLine(Yarn.Line line)
     {
+		if (takeOverBox[0])
+		{
+			currentTakeover.RunLine(line);
+			break;
+		}
         string goalText;
         List<string> tags =new List<string>();
         if (line.text[0] == '#')
@@ -207,6 +212,9 @@ public class ThisIsUI : DialogueUIBehaviour
             case "alias":
                 portrait.SetAlias(splitCommand[1], splitCommand[2]);
                 break;
+			case "showpuzzle":
+				currentTakeoverType = Type.GetType(splitCommand[1]);
+				break;
             default:
                 Debug.LogError("Unknown command " + splitCommand[0]);
                 break;
@@ -216,6 +224,9 @@ public class ThisIsUI : DialogueUIBehaviour
 
         yield break;
     }
+
+	UiTakeover currentTakeover = null;
+	//we need to yield return an ienumerator in case the puzzle doesn't want to immediately show a line but also we need to hold onto the object so we know where and how to call the surrogate runline and runoptions functions. Also fuck a surrogate runcommand, we're not doing that. Parse lines yourself, so that people can call other commands and don't have to worry about rebuilding the whole suite inside the takeover.
 
     // The node has ended.
     public override IEnumerator NodeComplete(string nextNode)
